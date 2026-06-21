@@ -1,0 +1,77 @@
+{
+  "nav": {
+    "home": "خانه",
+    "services": "خدمات",
+    "works": "نمونه‌کارها",
+    "contact": "تماس"
+  },
+  "hero": {
+    "downloadResume": "دانلود رزومه"
+  },
+  "services": {
+    "title": "خدمات"
+  },
+  "works": {
+    "title": "نمونه‌کارها",
+    "loading": "در حال بارگذاری...",
+    "error": "خطا در بارگذاری نمونه‌کارها."
+  },
+  "contact": {
+    "title": "ارتباط با من",
+    "name": "نام:",
+    "namePlaceholder": "نام شما چیست؟",
+    "message": "پیام:",
+    "messagePlaceholder": "بیایید ارتباط برقرار کنیم!",
+    "submit": "ارسال",
+    "sending": "در حال ارسال...",
+    "success": "پیام با موفقیت ارسال شد!",
+    "error": "خطا در ارسال. دوباره تلاش کنید."
+  },
+  "footer": {
+    "credit": "قالب ساخته شده با ❤️ توسط",
+    "viewSite": "مشاهده سایت",
+    "manageWorks": "مدیریت نمونه‌کارها"
+  },
+  "login": {
+    "title": "ورود ادمین",
+    "username": "نام کاربری",
+    "usernamePlaceholder": "نام کاربری خود را وارد کنید",
+    "password": "رمز عبور",
+    "passwordPlaceholder": "رمز عبور خود را وارد کنید",
+    "submit": "ورود",
+    "submitting": "در حال ورود...",
+    "errorRequired": "لطفاً تمام فیلدها را پر کنید",
+    "errorShort": "حداقل ۳ کاراکتر وارد کنید",
+    "errorInvalid": "نام کاربری یا رمز عبور اشتباه است",
+    "errorNetwork": "خطا در ارتباط با سرور",
+    "errorServer": "خطای سرور، لطفاً بعداً تلاش کنید",
+    "errorExpired": "نشست منقضی شده، دوباره وارد شوید"
+  },
+  "admin": {
+    "title": "مدیریت نمونه‌کارها",
+    "addWork": "+ افزودن نمونه‌کار",
+    "preview": "پیش‌نمایش",
+    "titleCol": "عنوان",
+    "badges": "برچسب‌ها",
+    "actions": "عملیات",
+    "edit": "ویرایش",
+    "delete": "حذف",
+    "empty": "هنوز نمونه‌کاری افزوده نشده است.",
+    "editTitle": "ویرایش نمونه‌کار",
+    "addTitle": "افزودن نمونه‌کار",
+    "titleLabel": "عنوان *",
+    "description": "توضیحات",
+    "projectUrl": "آدرس پروژه",
+    "badgesLabel": "برچسب‌ها (جدا شده با کاما)",
+    "imagePdf": "تصویر / PDF",
+    "save": "ذخیره",
+    "saving": "در حال ذخیره...",
+    "cancel": "انصراف",
+    "deleteConfirm": "آیا این نمونه‌کار حذف شود؟"
+  },
+  "language": {
+    "fa": "فارسی",
+    "en": "English",
+    "ar": "العربية"
+  }
+}

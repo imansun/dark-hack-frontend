@@ -6,6 +6,8 @@ import Services from './components/Services.jsx';
 import Works from './components/Works.jsx';
 import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
+import AdminDashboard from './components/AdminDashboard.jsx';
+import AdminLogin from './components/AdminLogin.jsx';
 
 const SECTIONS = ['heroHeader', 'services', 'works', 'contact'];
 const BREAKPOINT = 576;
@@ -13,6 +15,12 @@ const BREAKPOINT = 576;
 export default function App() {
   const [activeSection, setActiveSection] = useState('heroHeader');
   const [menuOpen, setMenuOpen] = useState(false);
+  const [adminMode, setAdminMode] = useState(
+    window.location.hash === '#admin',
+  );
+  const [adminToken, setAdminToken] = useState(
+    localStorage.getItem('admin_token') || null,
+  );
   const navRef = useRef(null);
   const sweetScrollRef = useRef(null);
 
@@ -96,22 +104,44 @@ export default function App() {
     });
   };
 
+  const toggleAdmin = () => {
+    const next = !adminMode;
+    setAdminMode(next);
+    window.location.hash = next ? 'admin' : '';
+    if (next) {
+      const stored = localStorage.getItem('admin_token');
+      if (stored && !adminToken) setAdminToken(stored);
+    }
+  };
+
   return (
     <>
-      <Navbar
-        ref={navRef}
-        activeSection={activeSection}
-        menuOpen={menuOpen}
-        toggleMenu={handleToggleMenu}
-        onNavClick={handleNavClick}
-      />
+      {!adminMode && (
+        <Navbar
+          ref={navRef}
+          activeSection={activeSection}
+          menuOpen={menuOpen}
+          toggleMenu={handleToggleMenu}
+          onNavClick={handleNavClick}
+        />
+      )}
       <main>
-        <Hero paddingTop={menuOpen ? 0 : undefined} navRef={navRef} />
-        <Services />
-        <Works />
-        <Contact />
+        {adminMode ? (
+          adminToken ? (
+            <AdminDashboard token={adminToken} onLogout={() => { setAdminToken(null); localStorage.removeItem('admin_token'); }} />
+          ) : (
+            <AdminLogin onLogin={(token) => setAdminToken(token)} />
+          )
+        ) : (
+          <>
+            <Hero paddingTop={menuOpen ? 0 : undefined} navRef={navRef} />
+            <Services />
+            <Works />
+            <Contact />
+          </>
+        )}
       </main>
-      <Footer />
+      <Footer adminMode={adminMode} toggleAdmin={toggleAdmin} />
     </>
   );
 }

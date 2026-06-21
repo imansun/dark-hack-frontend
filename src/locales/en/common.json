@@ -1,0 +1,77 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "works": "Works",
+    "contact": "Contact"
+  },
+  "hero": {
+    "downloadResume": "Download Resume"
+  },
+  "services": {
+    "title": "Services"
+  },
+  "works": {
+    "title": "My Works",
+    "loading": "Loading...",
+    "error": "Failed to load works."
+  },
+  "contact": {
+    "title": "Let's Connect!",
+    "name": "Name:",
+    "namePlaceholder": "What's your name?",
+    "message": "Message:",
+    "messagePlaceholder": "Let's connect!",
+    "submit": "Submit",
+    "sending": "Sending...",
+    "success": "Message sent successfully!",
+    "error": "Failed to send. Try again."
+  },
+  "footer": {
+    "credit": "Template made with ❤️ by",
+    "viewSite": "View Site",
+    "manageWorks": "Manage Works"
+  },
+  "login": {
+    "title": "Admin Login",
+    "username": "Username",
+    "usernamePlaceholder": "Enter your username",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "submit": "Sign In",
+    "submitting": "Signing in...",
+    "errorRequired": "Please fill in all fields",
+    "errorShort": "Minimum 3 characters required",
+    "errorInvalid": "Invalid username or password",
+    "errorNetwork": "Connection error",
+    "errorServer": "Server error, please try again later",
+    "errorExpired": "Session expired, please log in again"
+  },
+  "admin": {
+    "title": "Manage Works",
+    "addWork": "+ Add Work",
+    "preview": "Preview",
+    "titleCol": "Title",
+    "badges": "Badges",
+    "actions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete",
+    "empty": "No works yet.",
+    "editTitle": "Edit Work",
+    "addTitle": "Add Work",
+    "titleLabel": "Title *",
+    "description": "Description",
+    "projectUrl": "Project URL",
+    "badgesLabel": "Badges (comma separated)",
+    "imagePdf": "Image / PDF",
+    "save": "Save",
+    "saving": "Saving...",
+    "cancel": "Cancel",
+    "deleteConfirm": "Delete this work?"
+  },
+  "language": {
+    "fa": "فارسی",
+    "en": "English",
+    "ar": "العربية"
+  }
+}

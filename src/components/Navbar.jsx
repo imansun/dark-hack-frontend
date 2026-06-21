@@ -1,14 +1,17 @@
 import { forwardRef, useRef } from 'react';
-
-const LINKS = [
-  { id: 'heroHeader', label: '<Home />' },
-  { id: 'services', label: '<Services />' },
-  { id: 'works', label: '<Works />' },
-  { id: 'contact', label: '<Contact />' },
-];
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './LanguageSwitcher.jsx';
 
 const Navbar = forwardRef(function Navbar({ activeSection, menuOpen, toggleMenu, onNavClick }, ref) {
+  const { t } = useTranslation();
   const listRef = useRef(null);
+
+  const LINKS = [
+    { id: 'heroHeader', label: t('nav.home') },
+    { id: 'services', label: t('nav.services') },
+    { id: 'works', label: t('nav.works') },
+    { id: 'contact', label: t('nav.contact') },
+  ];
 
   const handleLinkClick = (e, id) => {
     onNavClick(id);
@@ -40,6 +43,9 @@ const Navbar = forwardRef(function Navbar({ activeSection, menuOpen, toggleMenu,
               </a>
             </li>
           ))}
+          <li className="nav__list-item nav__list-item--lang">
+            <LanguageSwitcher />
+          </li>
         </ul>
       </div>
     </nav>

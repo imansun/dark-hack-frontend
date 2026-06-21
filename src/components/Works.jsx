@@ -1,40 +1,72 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import PdfPreview from './PdfPreview';
 
-const FALLBACK_WORKS = Array.from({ length: 6 }, (_, i) => ({
-  id: i + 1,
-  title: 'My Landing Page',
-  imageUrl: '/assets/works/sample.png',
-  badges: [{ name: 'HTML' }, { name: 'CSS' }, { name: 'JavaScript' }],
-}));
+const isPdf = (url) => url?.toLowerCase().endsWith('.pdf');
+
+function MediaPreview({ url, title }) {
+  if (!url) {
+    return <img src="/assets/works/sample.png" alt={title} />;
+  }
+  if (isPdf(url)) {
+    return <PdfPreview url={url} alt={title} />;
+  }
+  return <img src={url} alt={title} />;
+}
 
 export default function Works() {
-  const [works, setWorks] = useState(FALLBACK_WORKS);
+  const { t, i18n } = useTranslation();
+  const [works, setWorks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('/api/works')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data && data.length) setWorks(data);
+    fetch(`/api/works?lang=${i18n.language}`)
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to fetch works');
+        return res.json();
       })
-      .catch(() => {});
-  }, []);
+      .then(setWorks)
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
+  }, [i18n.language]);
+
+  if (loading) {
+    return (
+      <section id="works" className="section container">
+        <h2 className="section__title">{t('works.title')}</h2>
+        <p style={{ marginTop: '5rem', color: '#688277' }}>{t('works.loading')}</p>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section id="works" className="section container">
+        <h2 className="section__title">{t('works.title')}</h2>
+        <p style={{ marginTop: '5rem', color: '#ff6b6b' }}>{t('works.error')}</p>
+      </section>
+    );
+  }
 
   return (
     <section id="works" className="section container">
-      <h2 className="section__title">My Works</h2>
+      <h2 className="section__title">{t('works.title')}</h2>
       <div className="works">
-        {works.map((work, i) => (
+        {works.map((work) => (
           <article key={work.id} className="work">
             <div className="work__box">
               <span className="work__img-box">
-                <img src={work.imageUrl || '/assets/works/sample.png'} alt={`My Work ${i + 1}`} />
+                <MediaPreview url={work.imageUrl} title={work.title} />
               </span>
               <h3 className="work__title">{work.title}</h3>
-              <span className="work__badges">
-                {(work.badges || []).map((badge, j) => (
-                  <span key={j} className="work__badge">{badge.name}</span>
-                ))}
-              </span>
+              {work.badges?.length > 0 && (
+                <span className="work__badges">
+                  {work.badges.map((badge, j) => (
+                    <span key={j} className="work__badge">{badge.name}</span>
+                  ))}
+                </span>
+              )}
             </div>
           </article>
         ))}

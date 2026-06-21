@@ -1,0 +1,77 @@
+{
+  "nav": {
+    "home": "الرئيسية",
+    "services": "الخدمات",
+    "works": "الأعمال",
+    "contact": "اتصل بنا"
+  },
+  "hero": {
+    "downloadResume": "تحميل السيرة الذاتية"
+  },
+  "services": {
+    "title": "الخدمات"
+  },
+  "works": {
+    "title": "أعمالي",
+    "loading": "جارٍ التحميل...",
+    "error": "فشل في تحميل الأعمال."
+  },
+  "contact": {
+    "title": "تواصل معي!",
+    "name": "الاسم:",
+    "namePlaceholder": "ما اسمك؟",
+    "message": "الرسالة:",
+    "messagePlaceholder": "دعنا نتواصل!",
+    "submit": "إرسال",
+    "sending": "جارٍ الإرسال...",
+    "success": "تم إرسال الرسالة بنجاح!",
+    "error": "فشل الإرسال. حاول مرة أخرى."
+  },
+  "footer": {
+    "credit": "القالب مصنوع بـ ❤️ بواسطة",
+    "viewSite": "عرض الموقع",
+    "manageWorks": "إدارة الأعمال"
+  },
+  "login": {
+    "title": "تسجيل الدخول للمشرف",
+    "username": "اسم المستخدم",
+    "usernamePlaceholder": "أدخل اسم المستخدم",
+    "password": "كلمة المرور",
+    "passwordPlaceholder": "أدخل كلمة المرور",
+    "submit": "تسجيل الدخول",
+    "submitting": "جارٍ تسجيل الدخول...",
+    "errorRequired": "يرجى ملء جميع الحقول",
+    "errorShort": "الحد الأدنى 3 أحرف",
+    "errorInvalid": "اسم المستخدم أو كلمة المرور غير صحيحة",
+    "errorNetwork": "خطأ في الاتصال",
+    "errorServer": "خطأ في الخادم، حاول مرة أخرى لاحقاً",
+    "errorExpired": "انتهت الجلسة، يرجى تسجيل الدخول مرة أخرى"
+  },
+  "admin": {
+    "title": "إدارة الأعمال",
+    "addWork": "+ إضافة عمل",
+    "preview": "معاينة",
+    "titleCol": "العنوان",
+    "badges": "الوسوم",
+    "actions": "الإجراءات",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "empty": "لا توجد أعمال بعد.",
+    "editTitle": "تعديل العمل",
+    "addTitle": "إضافة عمل",
+    "titleLabel": "العنوان *",
+    "description": "الوصف",
+    "projectUrl": "رابط المشروع",
+    "badgesLabel": "الوسوم (مفصولة بفاصلة)",
+    "imagePdf": "صورة / PDF",
+    "save": "حفظ",
+    "saving": "جارٍ الحفظ...",
+    "cancel": "إلغاء",
+    "deleteConfirm": "هل تريد حذف هذا العمل؟"
+  },
+  "language": {
+    "fa": "فارسی",
+    "en": "English",
+    "ar": "العربية"
+  }
+}

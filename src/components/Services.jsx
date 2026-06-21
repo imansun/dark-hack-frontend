@@ -1,23 +1,41 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
-const FALLBACK_SERVICES = [
+const FALLBACK_SERVICES_FA = [
+  { title: 'استقرار', description: 'همیشه آماده پاسخگویی به هرگونه مشکل یا نگرانی شما هستم.', imageUrl: '/assets/services/support.svg' },
+  { title: 'طراحی', description: 'متخصص در خلق وب‌سایت‌های stunning که هم visually appealing و هم user-friendly هستند.', imageUrl: '/assets/services/design.svg' },
+  { title: 'توسعه', description: 'خدمات توسعه وب سفارشی متناسب با نیازهای خاص شما به عنوان یک حرفه‌ای solo ارائه می‌دهم.', imageUrl: '/assets/services/developing.svg' },
+];
+
+const FALLBACK_SERVICES_EN = [
   { title: 'Deployment', description: 'I am always available to address any issues or concerns you may have.', imageUrl: '/assets/services/support.svg' },
   { title: 'Design', description: 'Specialized in creating stunning websites that are both visually appealing and user-friendly.', imageUrl: '/assets/services/design.svg' },
   { title: 'Developing', description: 'I offer custom web development services tailored to your specific needs as a solo professional.', imageUrl: '/assets/services/developing.svg' },
 ];
 
+const FALLBACK_SERVICES_AR = [
+  { title: 'النشر', description: 'أنا دائمًا متاح لمعالجة أي مشاكل أو استفسارات قد تكون لديك.', imageUrl: '/assets/services/support.svg' },
+  { title: 'التصميم', description: 'متخصص في إنشاء مواقع ويب مذهلة وجذابة بصريًا وسهلة الاستخدام.', imageUrl: '/assets/services/design.svg' },
+  { title: 'التطوير', description: 'أقدم خدمات تطوير ويب مخصصة تناسب احتياجاتك الخاصة كمحترف مستقل.', imageUrl: '/assets/services/developing.svg' },
+];
+
+const FALLBACKS = { fa: FALLBACK_SERVICES_FA, en: FALLBACK_SERVICES_EN, ar: FALLBACK_SERVICES_AR };
+
 export default function Services() {
-  const [services, setServices] = useState(FALLBACK_SERVICES);
+  const { t, i18n } = useTranslation();
+  const fallback = FALLBACKS[i18n.language] || FALLBACK_SERVICES_FA;
+  const [services, setServices] = useState(fallback);
   const currentServiceBG = useRef(null);
 
   useEffect(() => {
-    fetch('/api/services')
+    setServices(fallback);
+    fetch(`/api/services?lang=${i18n.language}`)
       .then((res) => res.json())
       .then((data) => {
         if (data && data.length) setServices(data);
       })
       .catch(() => {});
-  }, []);
+  }, [i18n.language]);
 
   const moveBG = useCallback((x, y) => {
     if (currentServiceBG.current) {
@@ -56,7 +74,7 @@ export default function Services() {
 
   return (
     <section id="services" className="section container">
-      <h2 className="section__title">Services</h2>
+      <h2 className="section__title">{t('services.title')}</h2>
       <div className="service-cards">
         {services.map((service, i) => (
           <article
