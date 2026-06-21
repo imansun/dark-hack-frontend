@@ -2,7 +2,7 @@
   "nav": {
     "home": "Home",
     "services": "Services",
-    "works": "Works",
+    "works": "Licenses",
     "contact": "Contact"
   },
   "hero": {
@@ -12,9 +12,9 @@
     "title": "Services"
   },
   "works": {
-    "title": "My Works",
+    "title": "Licenses",
     "loading": "Loading...",
-    "error": "Failed to load works."
+    "error": "Failed to load licenses."
   },
   "contact": {
     "title": "Let's Connect!",
@@ -30,7 +30,7 @@
   "footer": {
     "credit": "Template made with ❤️ by",
     "viewSite": "View Site",
-    "manageWorks": "Manage Works"
+    "manageWorks": "Manage Licenses"
   },
   "login": {
     "title": "Admin Login",
@@ -48,17 +48,17 @@
     "errorExpired": "Session expired, please log in again"
   },
   "admin": {
-    "title": "Manage Works",
-    "addWork": "+ Add Work",
+    "title": "Manage Licenses",
+    "addWork": "+ Add License",
     "preview": "Preview",
     "titleCol": "Title",
     "badges": "Badges",
     "actions": "Actions",
     "edit": "Edit",
     "delete": "Delete",
-    "empty": "No works yet.",
-    "editTitle": "Edit Work",
-    "addTitle": "Add Work",
+    "empty": "No licenses yet.",
+    "editTitle": "Edit License",
+    "addTitle": "Add License",
     "titleLabel": "Title *",
     "description": "Description",
     "projectUrl": "Project URL",
@@ -67,7 +67,7 @@
     "save": "Save",
     "saving": "Saving...",
     "cancel": "Cancel",
-    "deleteConfirm": "Delete this work?"
+    "deleteConfirm": "Delete this license?"
   },
   "language": {
     "fa": "فارسی",
