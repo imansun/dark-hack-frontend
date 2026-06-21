@@ -3,6 +3,7 @@
     "home": "Home",
     "services": "Services",
     "works": "Licenses",
+    "blog": "Blog",
     "contact": "Contact"
   },
   "hero": {
@@ -15,6 +16,12 @@
     "title": "Licenses",
     "loading": "Loading...",
     "error": "Failed to load licenses."
+  },
+  "blog": {
+    "title": "Blog",
+    "loading": "Loading...",
+    "error": "Failed to load posts.",
+    "empty": "No posts published yet."
   },
   "contact": {
     "title": "Let's Connect!",

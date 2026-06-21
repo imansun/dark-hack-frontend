@@ -4,12 +4,13 @@ import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
 import Services from './components/Services.jsx';
 import Works from './components/Works.jsx';
+import Blog from './components/Blog.jsx';
 import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
 import AdminDashboard from './components/AdminDashboard.jsx';
 import AdminLogin from './components/AdminLogin.jsx';
 
-const SECTIONS = ['heroHeader', 'services', 'works', 'contact'];
+const SECTIONS = ['heroHeader', 'services', 'works', 'blog', 'contact'];
 const BREAKPOINT = 576;
 
 export default function App() {
@@ -137,6 +138,7 @@ export default function App() {
             <Hero paddingTop={menuOpen ? 0 : undefined} navRef={navRef} />
             <Services />
             <Works />
+            <Blog />
             <Contact />
           </>
         )}

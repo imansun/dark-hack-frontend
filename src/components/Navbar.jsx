@@ -10,6 +10,7 @@ const Navbar = forwardRef(function Navbar({ activeSection, menuOpen, toggleMenu,
     { id: 'heroHeader', label: t('nav.home') },
     { id: 'services', label: t('nav.services') },
     { id: 'works', label: t('nav.works') },
+    { id: 'blog', label: t('nav.blog') },
     { id: 'contact', label: t('nav.contact') },
   ];
 
