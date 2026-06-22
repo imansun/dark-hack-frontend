@@ -21,7 +21,7 @@ const Navbar = forwardRef(function Navbar({ activeSection, menuOpen, toggleMenu,
 
   return (
     <nav id="navBar" ref={ref} className="nav">
-      <div className="container">
+      <div className="container nav__container-inner">
         <button type="button" id="hamburgerBtn" className="nav__hamburger-btn" onClick={toggleMenu}>
           <span className="nav__hamburger-top"></span>
           <span className="nav__hamburger-center"></span>
@@ -44,10 +44,10 @@ const Navbar = forwardRef(function Navbar({ activeSection, menuOpen, toggleMenu,
               </a>
             </li>
           ))}
-          <li className="nav__list-item nav__list-item--lang">
-            <LanguageSwitcher />
-          </li>
         </ul>
+        <div className="nav__lang-wrapper">
+          <LanguageSwitcher />
+        </div>
       </div>
     </nav>
   );
