@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
+const FALLBACK_IMGS = ['support', 'design', 'developing'];
+
 export default function Services() {
   const { t, i18n } = useTranslation();
   const [services, setServices] = useState([]);
@@ -78,9 +80,10 @@ export default function Services() {
               onMouseLeave={handleMouseLeave}
             >
               <span className="service-card__illustration">
-                {service.imageUrl && (
-                  <img src={service.imageUrl} alt={`${service.title} Illustration`} />
-                )}
+                <img
+                  src={service.imageUrl || `/assets/services/${FALLBACK_IMGS[i]}.svg`}
+                  alt={`${service.title} Illustration`}
+                />
               </span>
               <h3 className="service-card__title">{service.title}</h3>
               <p className="service-card__msg">{service.description}</p>
