@@ -5,14 +5,20 @@ import PdfPreview from './PdfPreview';
 const isPdf = (url) => url?.toLowerCase().endsWith('.pdf');
 const HOVER_DELAY = 1500;
 
-function MediaPreview({ url, title }) {
+function MediaPreview({ url, title, imageFit, imagePosition }) {
+  const imgStyle = {
+    width: '100%',
+    display: 'block',
+    objectFit: imageFit || 'cover',
+    objectPosition: imagePosition || 'center',
+  };
   if (!url) {
-    return <img src="/assets/works/sample.png" alt={title} />;
+    return <img src="/assets/works/sample.png" alt={title} style={imgStyle} />;
   }
   if (isPdf(url)) {
     return <PdfPreview url={url} alt={title} />;
   }
-  return <img src={url} alt={title} />;
+  return <img src={url} alt={title} style={imgStyle} />;
 }
 
 const lightboxStyles = {
@@ -115,7 +121,7 @@ export default function Works() {
               onMouseLeave={handleMouseLeave}
             >
               <span className="work__img-box">
-                <MediaPreview url={work.imageUrl} title={work.title} />
+                <MediaPreview url={work.imageUrl} title={work.title} imageFit={work.imageFit} imagePosition={work.imagePosition} />
               </span>
               <h3 className="work__title">{work.title}</h3>
               {work.badges?.length > 0 && (

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useToast } from './Toast';
 import PdfPreview from './PdfPreview';
 
-const EMPTY_FORM = { title: '', title_en: '', title_ar: '', description: '', description_en: '', description_ar: '', projectUrl: '', badges: '', image: null };
+const EMPTY_FORM = { title: '', title_en: '', title_ar: '', description: '', description_en: '', description_ar: '', projectUrl: '', badges: '', image: null, imageFit: 'cover', imagePosition: 'center' };
 const isPdf = (url) => url?.toLowerCase().endsWith('.pdf');
 
 function MediaThumb({ url, alt }) {
@@ -40,6 +40,7 @@ export default function WorkManager({ token, onLogout }) {
       title: work.title, title_en: work.title_en || '', title_ar: work.title_ar || '',
       description: work.description || '', description_en: work.description_en || '', description_ar: work.description_ar || '',
       projectUrl: work.projectUrl || '', badges: (work.badges || []).map((b) => b.name).join(', '), image: null,
+      imageFit: work.imageFit || 'cover', imagePosition: work.imagePosition || 'center',
     });
     setShowForm(true);
   };
@@ -55,7 +56,7 @@ export default function WorkManager({ token, onLogout }) {
     setSending(true);
 
     const body = new FormData();
-    ['title', 'title_en', 'title_ar', 'description', 'description_en', 'description_ar', 'projectUrl'].forEach((k) => body.append(k, form[k]));
+    ['title', 'title_en', 'title_ar', 'description', 'description_en', 'description_ar', 'projectUrl', 'imageFit', 'imagePosition'].forEach((k) => body.append(k, form[k]));
     body.append('badges', JSON.stringify(form.badges.split(',').map((s) => s.trim()).filter(Boolean)));
     if (form.image) body.append('image', form.image);
 
@@ -155,12 +156,44 @@ export default function WorkManager({ token, onLogout }) {
             </div>
           </div>
 
-          <div style={{ marginBottom: '2rem' }}>
+          <div style={{ marginBottom: '1.5rem' }}>
             <label style={{ display: 'block', fontSize: '1.2rem', fontWeight: 600, color: '#999', marginBottom: '0.4rem' }}>Image / PDF</label>
             <input
               type="file" accept="image/*,.pdf" onChange={handleChange} name="image"
               style={{ color: '#888', fontFamily: 'inherit', fontSize: '1.3rem', width: '100%' }}
             />
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
+            <div>
+              <label style={{ display: 'block', fontSize: '1.2rem', fontWeight: 600, color: '#999', marginBottom: '0.4rem' }}>Image Fit</label>
+              <select name="imageFit" value={form.imageFit} onChange={handleChange} style={inputSx}
+                onFocus={(e) => e.target.style.borderColor = '#00FF94'}
+                onBlur={(e) => e.target.style.borderColor = '#2a2a2a'}
+              >
+                <option value="cover">Cover (برش)</option>
+                <option value="contain">Contain (درون قاب)</option>
+                <option value="fill">Fill (پر کردن)</option>
+                <option value="none">None (واقعی)</option>
+              </select>
+            </div>
+            <div>
+              <label style={{ display: 'block', fontSize: '1.2rem', fontWeight: 600, color: '#999', marginBottom: '0.4rem' }}>Image Position</label>
+              <select name="imagePosition" value={form.imagePosition} onChange={handleChange} style={inputSx}
+                onFocus={(e) => e.target.style.borderColor = '#00FF94'}
+                onBlur={(e) => e.target.style.borderColor = '#2a2a2a'}
+              >
+                <option value="center">Center</option>
+                <option value="top">Top</option>
+                <option value="bottom">Bottom</option>
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+                <option value="top left">Top Left</option>
+                <option value="top right">Top Right</option>
+                <option value="bottom left">Bottom Left</option>
+                <option value="bottom right">Bottom Right</option>
+              </select>
+            </div>
           </div>
 
           <div style={{ display: 'flex', gap: '1rem' }}>
