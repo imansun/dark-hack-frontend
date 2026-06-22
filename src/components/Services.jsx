@@ -1,40 +1,21 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const FALLBACK_SERVICES_FA = [
-  { title: 'استقرار', description: 'همیشه آماده پاسخگویی به هرگونه مشکل یا نگرانی شما هستم.', imageUrl: '/assets/services/support.svg' },
-  { title: 'طراحی', description: 'متخصص در خلق وب‌سایت‌های stunning که هم visually appealing و هم user-friendly هستند.', imageUrl: '/assets/services/design.svg' },
-  { title: 'توسعه', description: 'خدمات توسعه وب سفارشی متناسب با نیازهای خاص شما به عنوان یک حرفه‌ای solo ارائه می‌دهم.', imageUrl: '/assets/services/developing.svg' },
-];
-
-const FALLBACK_SERVICES_EN = [
-  { title: 'Deployment', description: 'I am always available to address any issues or concerns you may have.', imageUrl: '/assets/services/support.svg' },
-  { title: 'Design', description: 'Specialized in creating stunning websites that are both visually appealing and user-friendly.', imageUrl: '/assets/services/design.svg' },
-  { title: 'Developing', description: 'I offer custom web development services tailored to your specific needs as a solo professional.', imageUrl: '/assets/services/developing.svg' },
-];
-
-const FALLBACK_SERVICES_AR = [
-  { title: 'النشر', description: 'أنا دائمًا متاح لمعالجة أي مشاكل أو استفسارات قد تكون لديك.', imageUrl: '/assets/services/support.svg' },
-  { title: 'التصميم', description: 'متخصص في إنشاء مواقع ويب مذهلة وجذابة بصريًا وسهلة الاستخدام.', imageUrl: '/assets/services/design.svg' },
-  { title: 'التطوير', description: 'أقدم خدمات تطوير ويب مخصصة تناسب احتياجاتك الخاصة كمحترف مستقل.', imageUrl: '/assets/services/developing.svg' },
-];
-
-const FALLBACKS = { fa: FALLBACK_SERVICES_FA, en: FALLBACK_SERVICES_EN, ar: FALLBACK_SERVICES_AR };
-
 export default function Services() {
   const { t, i18n } = useTranslation();
-  const fallback = FALLBACKS[i18n.language] || FALLBACK_SERVICES_FA;
-  const [services, setServices] = useState(fallback);
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
   const currentServiceBG = useRef(null);
 
   useEffect(() => {
-    setServices(fallback);
+    setLoading(true);
     fetch(`/api/services?lang=${i18n.language}`)
       .then((res) => res.json())
       .then((data) => {
         if (data && data.length) setServices(data);
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, [i18n.language]);
 
   const moveBG = useCallback((x, y) => {
@@ -70,32 +51,44 @@ export default function Services() {
     currentServiceBG.current = null;
   }, [moveBG]);
 
-  const imgs = ['support', 'design', 'developing'];
-
   return (
     <section id="services" className="section container">
       <h2 className="section__title">{t('services.title')}</h2>
-      <div className="service-cards">
-        {services.map((service, i) => (
-          <article
-            key={i}
-            className="service-card__box"
-            onMouseEnter={handleMouseEnter}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-          >
-            <span className="service-card__illustration">
-              <img
-                src={service.imageUrl || `/assets/services/${imgs[i]}.svg`}
-                alt={`${service.title} Illustration`}
-              />
-            </span>
-            <h3 className="service-card__title">{service.title}</h3>
-            <p className="service-card__msg">{service.description}</p>
-            <span className="service-card__bg"></span>
-          </article>
-        ))}
-      </div>
+      {loading ? (
+        <div style={{ display: 'flex', gap: '2rem', marginTop: '5rem', justifyContent: 'center' }}>
+          {[1, 2, 3].map((i) => (
+            <div key={i} style={{ flex: 1, maxWidth: '320px', background: '#141414', border: '1px solid #222', borderRadius: '14px', padding: '3rem 2rem' }}>
+              <div className="skeleton-line" style={{ width: '60px', height: '60px', borderRadius: '12px', margin: '0 auto 1.5rem' }} />
+              <div className="skeleton-line" style={{ width: '70%', height: '20px', margin: '0 auto 1rem' }} />
+              <div className="skeleton-line" style={{ width: '100%', height: '40px' }} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="service-cards">
+          {services.length === 0 && (
+            <p style={{ marginTop: '5rem', color: '#688277', textAlign: 'center' }}>{t('services.empty')}</p>
+          )}
+          {services.map((service, i) => (
+            <article
+              key={i}
+              className="service-card__box"
+              onMouseEnter={handleMouseEnter}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+            >
+              <span className="service-card__illustration">
+                {service.imageUrl && (
+                  <img src={service.imageUrl} alt={`${service.title} Illustration`} />
+                )}
+              </span>
+              <h3 className="service-card__title">{service.title}</h3>
+              <p className="service-card__msg">{service.description}</p>
+              <span className="service-card__bg"></span>
+            </article>
+          ))}
+        </div>
+      )}
     </section>
   );
 }

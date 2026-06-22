@@ -10,7 +10,8 @@
     "downloadResume": "دانلود رزومه"
   },
   "services": {
-    "title": "خدمات"
+    "title": "خدمات",
+    "empty": "خدمتی ثبت نشده است."
   },
   "works": {
     "title": "مجوزها",

@@ -12,9 +12,7 @@ function MediaPreview({ url, title, imageFit, imagePosition }) {
     objectFit: imageFit || 'cover',
     objectPosition: imagePosition || 'center',
   };
-  if (!url) {
-    return <img src="/assets/works/sample.png" alt={title} style={imgStyle} />;
-  }
+  if (!url) return null;
   if (isPdf(url)) {
     return <PdfPreview url={url} alt={title} />;
   }
@@ -95,10 +93,9 @@ export default function Works() {
   }, [stopDrag]);
 
   const handleLightboxEnter = useCallback((work) => {
-    if (work.imageUrl && isPdf(work.imageUrl)) return;
-    const src = work.imageUrl || '/assets/works/sample.png';
+    if (!work.imageUrl || isPdf(work.imageUrl)) return;
     timerRef.current = setTimeout(() => {
-      setLightbox({ src, title: work.title });
+      setLightbox({ src: work.imageUrl, title: work.title });
     }, HOVER_DELAY);
   }, []);
 

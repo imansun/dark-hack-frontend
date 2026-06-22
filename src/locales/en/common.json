@@ -10,7 +10,8 @@
     "downloadResume": "Download Resume"
   },
   "services": {
-    "title": "Services"
+    "title": "Services",
+    "empty": "No services yet."
   },
   "works": {
     "title": "Licenses",

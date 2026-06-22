@@ -1196,6 +1196,13 @@ input:-webkit-autofill:focus {
     0% { background-position: -200% 0; }
     100% { background-position: 200% 0; }
 }
+.skeleton-line {
+    height: 14px;
+    border-radius: 6px;
+    background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
 
 @keyframes cardEntrance {
     from { opacity: 0; transform: translateY(20px); }
