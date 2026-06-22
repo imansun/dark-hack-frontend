@@ -39,13 +39,20 @@ export default function Hero({ navRef }) {
   const fb = FALLBACKS[i18n.language] || FALLBACK_FA;
   const p = profile || fb;
 
+  const commaIdx = p.title?.indexOf('،') ?? -1;
+  const titlePart1 = commaIdx > -1 ? p.title.slice(0, commaIdx) : p.title;
+  const titlePart2 = commaIdx > -1 ? p.title.slice(commaIdx + 1).trim() : '';
+
   return (
     <header id="heroHeader" className="hero-header">
       <section className="header__container container">
         <div className="header__left">
           <span className="header__sup-text">{p.subtitle}</span>
           <h1 className="header__title">
-            <span className="header__title-1" data-role={p.title}>{p.title}</span>
+            <span className="header__title-1" data-role={titlePart1}>{titlePart1}</span>
+            {titlePart2 && (
+              <span className="header__title-2" data-role={titlePart2}>{titlePart2}</span>
+            )}
           </h1>
           <p className="header__msg">{p.description}</p>
           {p.resumeUrl && (
