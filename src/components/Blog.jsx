@@ -1,9 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const POSTS_PER_PAGE = 3;
+const POSTS_PER_PAGE = 6;
 
-export default function Blog() {
+function formatDate(dateStr, lang) {
+  if (!dateStr) return '';
+  const d = new Date(dateStr);
+  const locales = { fa: 'fa-IR', en: 'en-US', ar: 'ar-SA' };
+  return d.toLocaleDateString(locales[lang] || 'fa-IR', {
+    year: 'numeric', month: 'long', day: 'numeric',
+  });
+}
+
+function readingTime(text) {
+  if (!text) return 1;
+  return Math.max(1, Math.ceil(text.trim().split(/\s+/).length / 200));
+}
+
+export default function Blog({ onViewPost }) {
   const { t, i18n } = useTranslation();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,7 +45,9 @@ export default function Blog() {
     return (
       <section id="blog" className="section container">
         <h2 className="section__title">{t('blog.title')}</h2>
-        <p style={{ marginTop: '5rem', color: '#688277' }}>{t('blog.loading')}</p>
+        <div className="blog__loading">
+          <p>{t('blog.loading')}</p>
+        </div>
       </section>
     );
   }
@@ -40,7 +56,9 @@ export default function Blog() {
     return (
       <section id="blog" className="section container">
         <h2 className="section__title">{t('blog.title')}</h2>
-        <p style={{ marginTop: '5rem', color: '#ff6b6b' }}>{t('blog.error')}</p>
+        <div className="blog__loading">
+          <p style={{ color: '#ff6b6b' }}>{t('blog.error')}</p>
+        </div>
       </section>
     );
   }
@@ -49,113 +67,89 @@ export default function Blog() {
     return (
       <section id="blog" className="section container">
         <h2 className="section__title">{t('blog.title')}</h2>
-        <p style={{ marginTop: '5rem', color: '#688277' }}>{t('blog.empty')}</p>
+        <div className="blog__empty">
+          <p>{t('blog.empty')}</p>
+        </div>
       </section>
     );
   }
 
-  const pageBtnStyle = (active) => ({
-    minWidth: '36px',
-    height: '36px',
-    padding: '0 0.8rem',
-    borderRadius: '8px',
-    border: active ? 'none' : '1px solid #333',
-    background: active ? '#00FF94' : 'transparent',
-    color: active ? '#111' : '#888',
-    fontFamily: 'inherit',
-    fontSize: '1.3rem',
-    fontWeight: active ? 800 : 600,
-    cursor: 'pointer',
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    transition: 'all 0.15s',
-  });
-
   return (
     <section id="blog" className="section container">
       <h2 className="section__title">{t('blog.title')}</h2>
-      <div style={{
-        marginTop: '8rem',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '3rem',
-        width: '100%',
-        maxWidth: '800px',
-      }}>
-        {paginatedPosts.map((post) => (
-          <article key={post.id} style={{
-            background: '#1a1a1a',
-            borderRadius: '12px',
-            border: '1px solid #2a2a2a',
-            overflow: 'hidden',
-            transition: 'border-color 0.2s',
-          }}
-            onMouseEnter={(e) => e.currentTarget.style.borderColor = '#00FF94'}
-            onMouseLeave={(e) => e.currentTarget.style.borderColor = '#2a2a2a'}
-          >
-            {post.imageUrl && (
-              <div style={{ width: '100%', maxHeight: '300px', overflow: 'hidden' }}>
-                <img src={post.imageUrl} alt={post.title} style={{ width: '100%', height: 'auto', display: 'block' }} />
-              </div>
-            )}
-            <div style={{ padding: '2.5rem' }}>
-              <h3 style={{ fontSize: '2rem', fontWeight: 800, color: '#fff', marginBottom: '1rem', lineHeight: 1.4 }}>
-                {post.title}
-              </h3>
-              {post.excerpt && (
-                <p style={{ color: '#999', fontSize: '1.4rem', lineHeight: 1.8, marginBottom: '1.5rem' }}>
-                  {post.excerpt}
-                </p>
-              )}
-              <div style={{ color: '#ccc', fontSize: '1.4rem', lineHeight: 1.8, marginBottom: '1.5rem' }}>
-                {post.content?.length > 300 ? `${post.content.slice(0, 300)}...` : post.content}
-              </div>
-              {post.tags && (
-                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                  {post.tags.split(',').map((tag, i) => (
-                    <span key={i} style={{
-                      background: 'rgba(0,255,148,0.1)',
-                      color: '#00FF94',
-                      padding: '0.3rem 0.8rem',
-                      borderRadius: '4px',
-                      fontSize: '1.1rem',
-                      fontWeight: 600,
-                    }}>{tag.trim()}</span>
-                  ))}
+      <div className="blog">
+        {paginatedPosts.map((post) => {
+          const minRead = readingTime(post.content);
+          const pubDate = formatDate(post.createdAt, i18n.language);
+          return (
+            <article key={post.id} className="blog__card">
+              {post.imageUrl && (
+                <div className="blog__card-img">
+                  <img src={post.imageUrl} alt={post.title} loading="lazy" />
                 </div>
               )}
-            </div>
-          </article>
-        ))}
-        {totalPages > 1 && (
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginTop: '2rem', flexWrap: 'wrap' }}>
-            <button
-              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-              disabled={currentPage === 1}
-              style={{ ...pageBtnStyle(false), opacity: currentPage === 1 ? 0.4 : 1, cursor: currentPage === 1 ? 'not-allowed' : 'pointer' }}
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="15 18 9 12 15 6" />
-              </svg>
-            </button>
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-              <button key={page} onClick={() => setCurrentPage(page)} style={pageBtnStyle(page === currentPage)}>
-                {page}
-              </button>
-            ))}
-            <button
-              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-              disabled={currentPage === totalPages}
-              style={{ ...pageBtnStyle(false), opacity: currentPage === totalPages ? 0.4 : 1, cursor: currentPage === totalPages ? 'not-allowed' : 'pointer' }}
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="9 18 15 12 9 6" />
-              </svg>
-            </button>
-          </div>
-        )}
+              <div className="blog__card-body">
+                <div className="blog__card-meta">
+                  <span className="blog__card-date">{pubDate}</span>
+                  <span className="blog__card-reading">{minRead} {t('blog.readingTime')}</span>
+                </div>
+                <h3 className="blog__card-title">{post.title}</h3>
+                {post.excerpt && <p className="blog__card-excerpt">{post.excerpt}</p>}
+                {post.tags && (
+                  <div className="blog__card-tags">
+                    {post.tags.split(',').map((tag, i) => (
+                      <span key={i} className="blog__card-tag">{tag.trim()}</span>
+                    ))}
+                  </div>
+                )}
+                <button
+                  className="blog__card-btn"
+                  onClick={() => {
+                    if (onViewPost) onViewPost(post.slug);
+                    else window.location.hash = `blog/${post.slug}`;
+                  }}
+                >
+                  {t('blog.readMore')}
+                </button>
+              </div>
+            </article>
+          );
+        })}
       </div>
+
+      {totalPages > 1 && (
+        <div className="blog__pagination">
+          <button
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+            disabled={currentPage === 1}
+            className="blog__page-btn"
+            aria-label="Previous page"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points={i18n.language === 'fa' || i18n.language === 'ar' ? '15 18 9 12 15 6' : '9 18 15 12 9 6'} />
+            </svg>
+          </button>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={`blog__page-btn${page === currentPage ? ' blog__page-btn--active' : ''}`}
+            >
+              {page}
+            </button>
+          ))}
+          <button
+            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+            disabled={currentPage === totalPages}
+            className="blog__page-btn"
+            aria-label="Next page"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points={i18n.language === 'fa' || i18n.language === 'ar' ? '9 18 15 12 9 6' : '15 18 9 12 15 6'} />
+            </svg>
+          </button>
+        </div>
+      )}
     </section>
   );
 }

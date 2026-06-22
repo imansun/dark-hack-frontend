@@ -7,6 +7,7 @@ import Hero from './components/Hero.jsx';
 import Services from './components/Services.jsx';
 import Works from './components/Works.jsx';
 import Blog from './components/Blog.jsx';
+import BlogPost from './components/BlogPost.jsx';
 import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
 import AdminDashboard from './components/AdminDashboard.jsx';
@@ -25,6 +26,10 @@ export default function App() {
   const [adminToken, setAdminToken] = useState(
     localStorage.getItem('admin_token') || null,
   );
+  const [blogSlug, setBlogSlug] = useState(() => {
+    const match = window.location.hash.match(/^#blog\/(.+)$/);
+    return match ? match[1] : null;
+  });
   const { t } = useTranslation();
   const navRef = useRef(null);
   const sweetScrollRef = useRef(null);
@@ -109,6 +114,26 @@ export default function App() {
     });
   };
 
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash;
+      const blogMatch = hash.match(/^#blog\/(.+)$/);
+      if (blogMatch) {
+        setBlogSlug(blogMatch[1]);
+        setAdminMode(false);
+        window.scrollTo(0, 0);
+      } else if (hash === '#admin') {
+        setBlogSlug(null);
+        setAdminMode(true);
+      } else {
+        setBlogSlug(null);
+        setAdminMode(false);
+      }
+    };
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
+
   const toggleAdmin = () => {
     const next = !adminMode;
     setAdminMode(next);
@@ -117,6 +142,15 @@ export default function App() {
       const stored = localStorage.getItem('admin_token');
       if (stored && !adminToken) setAdminToken(stored);
     }
+  };
+
+  const handleViewPost = (slug) => {
+    window.location.hash = `blog/${slug}`;
+  };
+
+  const handleBackToBlog = () => {
+    window.location.hash = 'blog';
+    setBlogSlug(null);
   };
 
   const sectionMeta = {
@@ -131,7 +165,7 @@ export default function App() {
   return (
     <HelmetProvider>
       <SeoHelmet title={currentMeta.title} description={currentMeta.desc} />
-      {!adminMode && (
+      {!adminMode && !blogSlug && (
         <Navbar
           ref={navRef}
           activeSection={activeSection}
@@ -147,12 +181,14 @@ export default function App() {
           ) : (
             <AdminLogin onLogin={(token) => setAdminToken(token)} />
           )
+        ) : blogSlug ? (
+          <BlogPost slug={blogSlug} onBack={handleBackToBlog} />
         ) : (
           <>
             <Hero paddingTop={menuOpen ? 0 : undefined} navRef={navRef} />
             <Services />
             <Works />
-            <Blog />
+            <Blog onViewPost={handleViewPost} />
             <Contact />
           </>
         )}

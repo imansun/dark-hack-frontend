@@ -27,7 +27,17 @@
     "title": "Blog",
     "loading": "Loading...",
     "error": "Failed to load posts.",
-    "empty": "No posts published yet."
+    "empty": "No posts published yet.",
+    "readMore": "Read More",
+    "backToList": "Back to Blog",
+    "publishedOn": "Published on",
+    "updatedOn": "Last updated",
+    "readingTime": "min read",
+    "author": "Iman Norouzi Esfajir",
+    "share": "Share",
+    "relatedPosts": "Related Posts",
+    "notFound": "Post not found.",
+    "page": "Page"
   },
   "contact": {
     "title": "Let's Connect!",
