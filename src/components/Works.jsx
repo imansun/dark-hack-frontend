@@ -56,11 +56,18 @@ function Lightbox({ src, title, onClose }) {
 
 export default function Works() {
   const { t, i18n } = useTranslation();
+  const scrollRef = useRef(null);
   const [works, setWorks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [lightbox, setLightbox] = useState(null);
   const timerRef = useRef(null);
+
+  const scroll = useCallback((dir) => {
+    if (!scrollRef.current) return;
+    const amt = 320;
+    scrollRef.current.scrollBy({ left: dir === 'left' ? -amt : amt, behavior: 'smooth' });
+  }, []);
 
   const handleMouseEnter = useCallback((work) => {
     if (work.imageUrl && isPdf(work.imageUrl)) return;
@@ -109,7 +116,9 @@ export default function Works() {
   return (
     <section id="works" className="section container">
       <h2 className="section__title">{t('works.title')}</h2>
-      <div className="works">
+      <div className="works-wrapper">
+        <button className="works-scroll-btn works-scroll-btn--left" onClick={() => scroll('left')} aria-label="Scroll left">{'◀'}</button>
+        <div className="works" ref={scrollRef}>
         {works.map((work) => (
           <article
             key={work.id}
@@ -134,6 +143,8 @@ export default function Works() {
             </div>
           </article>
         ))}
+      </div>
+        <button className="works-scroll-btn works-scroll-btn--right" onClick={() => scroll('right')} aria-label="Scroll right">{'▶'}</button>
       </div>
       {lightbox && (
         <Lightbox

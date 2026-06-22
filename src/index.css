@@ -368,11 +368,48 @@ body {
 .works{
     margin-top: 10rem;
     display: flex;
-    flex-wrap: wrap;
+    gap: 2rem;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scroll-behavior: smooth;
+    padding: 1rem 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
 }
-.work{
+.works::-webkit-scrollbar {
+    display: none;
+}
+.works-wrapper {
+    position: relative;
     width: 100%;
-    padding: 2%;
+}
+.works-scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #333;
+    background: rgba(17, 17, 17, 0.8);
+    backdrop-filter: blur(4px);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00FF94;
+    transition: all 0.15s;
+}
+.works-scroll-btn:hover {
+    background: rgba(0, 255, 148, 0.15);
+    border-color: #00FF94;
+}
+.works-scroll-btn--left { left: -1rem; }
+.works-scroll-btn--right { right: -1rem; }
+.work{
+    flex: 0 0 280px;
+    min-width: 0;
 }
 .work__box{
     border-radius: 7px;
@@ -384,6 +421,7 @@ body {
     display: flex;
     border-radius: 7px;
     overflow: hidden;
+    aspect-ratio: auto;
 }
 .work__img-box img,
 .work__img-box canvas{
@@ -559,9 +597,6 @@ body {
     .nav__hamburger-btn{
         display: none;
     }
-    .work{
-        width: 50%;
-    }
 }
 @media only screen and (min-width: 48em) {
     .container {
@@ -589,9 +624,6 @@ body {
     }
     .section__title{
         font-size: 8rem;
-    }
-    .work{
-        width: 33.33333333333333%;
     }
     .contact__form{
         width: 40%;
