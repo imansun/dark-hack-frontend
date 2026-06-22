@@ -62,14 +62,39 @@ export default function Works() {
   const [error, setError] = useState(null);
   const [lightbox, setLightbox] = useState(null);
   const timerRef = useRef(null);
+  const isDown = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
 
-  const scroll = useCallback((dir) => {
-    if (!scrollRef.current) return;
-    const amt = 320;
-    scrollRef.current.scrollBy({ left: dir === 'left' ? -amt : amt, behavior: 'smooth' });
+  const stopDrag = useCallback(() => {
+    isDown.current = false;
+    if (scrollRef.current) scrollRef.current.classList.remove('works--dragging');
   }, []);
 
-  const handleMouseEnter = useCallback((work) => {
+  const handleMouseDown = useCallback((e) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    isDown.current = true;
+    el.classList.add('works--dragging');
+    startX.current = e.pageX - el.offsetLeft;
+    scrollLeft.current = el.scrollLeft;
+  }, []);
+
+  const handleMouseMove = useCallback((e) => {
+    if (!isDown.current || !scrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.5;
+    scrollRef.current.scrollLeft = scrollLeft.current - walk;
+  }, []);
+
+  useEffect(() => {
+    const up = () => stopDrag();
+    window.addEventListener('mouseup', up);
+    return () => window.removeEventListener('mouseup', up);
+  }, [stopDrag]);
+
+  const handleLightboxEnter = useCallback((work) => {
     if (work.imageUrl && isPdf(work.imageUrl)) return;
     const src = work.imageUrl || '/assets/works/sample.png';
     timerRef.current = setTimeout(() => {
@@ -77,7 +102,7 @@ export default function Works() {
     }, HOVER_DELAY);
   }, []);
 
-  const handleMouseLeave = useCallback(() => {
+  const handleLightboxLeave = useCallback(() => {
     if (timerRef.current) {
       clearTimeout(timerRef.current);
       timerRef.current = null;
@@ -116,9 +141,11 @@ export default function Works() {
   return (
     <section id="works" className="section container">
       <h2 className="section__title">{t('works.title')}</h2>
-      <div className="works-wrapper">
-        <button className="works-scroll-btn works-scroll-btn--left" onClick={() => scroll('left')} aria-label="Scroll left">{'◀'}</button>
-        <div className="works" ref={scrollRef}>
+      <div className="works"
+        ref={scrollRef}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+      >
         {works.map((work) => (
           <article
             key={work.id}
@@ -126,8 +153,8 @@ export default function Works() {
           >
             <div
               className="work__box"
-              onMouseEnter={() => handleMouseEnter(work)}
-              onMouseLeave={handleMouseLeave}
+              onMouseEnter={() => handleLightboxEnter(work)}
+              onMouseLeave={handleLightboxLeave}
             >
               <span className="work__img-box">
                 <MediaPreview url={work.imageUrl} title={work.title} imageFit={work.imageFit} imagePosition={work.imagePosition} />
@@ -143,8 +170,6 @@ export default function Works() {
             </div>
           </article>
         ))}
-      </div>
-        <button className="works-scroll-btn works-scroll-btn--right" onClick={() => scroll('right')} aria-label="Scroll right">{'▶'}</button>
       </div>
       {lightbox && (
         <Lightbox
