@@ -1,32 +1,38 @@
 import { useTranslation } from 'react-i18next';
 
 const LANGUAGES = [
-  { code: 'fa', label: 'فارسی', dir: 'rtl' },
-  { code: 'en', label: 'English', dir: 'ltr' },
-  { code: 'ar', label: 'العربية', dir: 'rtl' },
+  { code: 'fa', label: 'FA', full: 'فارسی', dir: 'rtl' },
+  { code: 'en', label: 'EN', full: 'English', dir: 'ltr' },
+  { code: 'ar', label: 'AR', full: 'العربية', dir: 'rtl' },
 ];
 
 export default function LanguageSwitcher() {
   const { i18n } = useTranslation();
 
-  const handleChange = (e) => {
-    const lang = e.target.value;
-    i18n.changeLanguage(lang);
-    localStorage.setItem('lang', lang);
-    const dir = LANGUAGES.find((l) => l.code === lang)?.dir || 'rtl';
-    document.documentElement.lang = lang;
+  const handleChange = (code) => {
+    i18n.changeLanguage(code);
+    localStorage.setItem('lang', code);
+    const dir = LANGUAGES.find((l) => l.code === code)?.dir || 'rtl';
+    document.documentElement.lang = code;
     document.documentElement.dir = dir;
   };
 
   return (
-    <select
-      value={i18n.language}
-      onChange={handleChange}
-      className="lang-switcher"
-    >
+    <div className="lang-radio">
       {LANGUAGES.map((l) => (
-        <option key={l.code} value={l.code}>{l.label}</option>
+        <label key={l.code} className="lang-radio__label">
+          <div className="lang-radio__back-side" />
+          <input
+            type="radio"
+            name="lang-radio"
+            value={l.code}
+            checked={i18n.language === l.code}
+            onChange={() => handleChange(l.code)}
+          />
+          <span className="lang-radio__text">{l.label}</span>
+          <span className="lang-radio__bottom-line" />
+        </label>
       ))}
-    </select>
+    </div>
   );
 }
