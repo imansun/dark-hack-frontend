@@ -7,6 +7,13 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'DigiVorojak';
+  src: url('/fonts/DigiVorojakBold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -92,6 +99,7 @@ body {
     font-weight: 800;
     font-size: 5rem;
     position: relative;
+    font-family: 'DigiVorojak', sans-serif;
 }
 .section__title::before{
     content: '';
