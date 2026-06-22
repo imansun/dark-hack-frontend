@@ -11,6 +11,7 @@ import AuthorInfoCard from './AuthorInfoCard';
 import AuthorPostsList from './AuthorPostsList';
 import 'prismjs/themes/prism-okaidia.css';
 import Prism from 'prismjs';
+import '../styles/post-detail.css';
 
 function formatDate(dateStr, lang) {
   if (!dateStr) return '';
@@ -115,36 +116,36 @@ function Comments({ postId, t, i18n }) {
   };
 
   return (
-    <section className="article-comments">
-      <h2 className="article-comments__title">
+    <section className="pd-comments">
+      <h2 className="pd-comments-title">
         {isRtl ? 'دیدگاه‌ها' : 'Comments'}
-        <span className="article-comments__count">{comments.length}</span>
+        <span className="pd-comments-count">{comments.length}</span>
       </h2>
 
       {comments.length > 0 ? (
-        <div className="article-comments__list">
+        <div>
           {comments.map((c) => (
-            <div key={c.id} className="article-comment">
-              <div className="article-comment__avatar">{c.author.charAt(0).toUpperCase()}</div>
-              <div className="article-comment__body">
-                <div className="article-comment__head">
-                  <span className="article-comment__name">{c.author}</span>
-                  <span className="article-comment__date">{formatDate(c.createdAt, i18n.language)}</span>
+            <div key={c.id} className="pd-comment">
+              <div className="pd-comment-avatar" style={{ background: '#6366f1', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 600, fontSize: '1.4rem' }}>{c.author.charAt(0).toUpperCase()}</div>
+              <div className="pd-comment-body">
+                <div className="pd-comment-head">
+                  <span className="pd-comment-author">{c.author}</span>
+                  <span className="pd-comment-date">{formatDate(c.createdAt, i18n.language)}</span>
                 </div>
-                <p>{c.content}</p>
+                <p className="pd-comment-text">{c.content}</p>
               </div>
             </div>
           ))}
         </div>
       ) : (
-        <p className="article-comments__empty">{isRtl ? 'هنوز دیدگاهی ثبت نشده. اولین نفر باشید!' : 'No comments yet. Be the first!'}</p>
+        <p className="pd-comments-empty">{isRtl ? 'هنوز دیدگاهی ثبت نشده. اولین نفر باشید!' : 'No comments yet. Be the first!'}</p>
       )}
 
-      <form className="article-comments__form" onSubmit={handleSubmit}>
-        <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder={isRtl ? 'نام شما' : 'Your name'} required className="article-input" />
-        <textarea value={content} onChange={(e) => setContent(e.target.value)} placeholder={isRtl ? 'دیدگاه شما...' : 'Write your comment...'} required rows={4} className="article-input" />
+      <form className="pd-comments-form" onSubmit={handleSubmit}>
+        <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder={isRtl ? 'نام شما' : 'Your name'} required className="pd-newsletter-input" />
+        <textarea value={content} onChange={(e) => setContent(e.target.value)} placeholder={isRtl ? 'دیدگاه شما...' : 'Write your comment...'} required rows={4} className="pd-newsletter-input" style={{ resize: 'vertical' }} />
         <TurnstileWidget ref={turnstileRef} />
-        <button type="submit" className="article-btn article-btn--primary" disabled={sending}>
+        <button type="submit" className="pd-error-btn" disabled={sending}>
           {sending ? (isRtl ? 'در حال ارسال...' : 'Sending...') : (isRtl ? 'ارسال دیدگاه' : 'Post Comment')}
         </button>
       </form>
@@ -185,15 +186,15 @@ function Newsletter({ t, i18n }) {
   };
 
   return (
-    <section className="article-newsletter">
-      <div className="article-newsletter__icon"><MailIcon /></div>
-      <div className="article-newsletter__body">
-        <h2 className="article-newsletter__title">{isRtl ? 'عضویت در خبرنامه' : 'Subscribe to Newsletter'}</h2>
-        <p className="article-newsletter__desc">{isRtl ? 'با عضویت در خبرنامه، از آخرین مقالات مطلع شوید.' : 'Get notified about new articles straight to your inbox.'}</p>
-        <form onSubmit={handleSubmit} className="article-newsletter__form">
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={isRtl ? 'ایمیل شما' : 'Your email'} required className="article-input" />
+    <section className="pd-newsletter">
+      <div className="pd-newsletter-icon"><MailIcon /></div>
+      <div className="pd-newsletter-body">
+        <h2 className="pd-newsletter-title">{isRtl ? 'عضویت در خبرنامه' : 'Subscribe to Newsletter'}</h2>
+        <p className="pd-newsletter-text">{isRtl ? 'با عضویت در خبرنامه، از آخرین مقالات مطلع شوید.' : 'Get notified about new articles straight to your inbox.'}</p>
+        <form className="pd-newsletter-form" onSubmit={handleSubmit}>
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={isRtl ? 'ایمیل شما' : 'Your email'} required className="pd-newsletter-input" />
           <TurnstileWidget ref={turnstileRef} />
-          <button type="submit" className="article-btn article-btn--primary" disabled={sending}>
+          <button type="submit" className="pd-newsletter-submit" disabled={sending}>
             {sending ? '...' : (isRtl ? 'عضویت' : 'Subscribe')}
           </button>
         </form>
@@ -246,16 +247,16 @@ export default function BlogPost({ slug, onBack }) {
 
   if (loading) {
     return (
-      <div className="article-loading">
-        <div className="skeleton-line" style={{ width: '60%', height: '32px', marginBottom: '3rem' }} />
-        <div className="skeleton-line" style={{ width: '80%', height: '40px', marginBottom: '2rem' }} />
-        <div className="skeleton-line" style={{ width: '40%', height: '16px', marginBottom: '2rem' }} />
-        <div className="skeleton-line" style={{ width: '100%', height: '300px', borderRadius: '12px', marginBottom: '2rem' }} />
+      <div className="pd-loading-card">
+        <div className="pd-skeleton" style={{ width: '60%', height: 32, marginBottom: '3rem' }} />
+        <div className="pd-skeleton" style={{ width: '80%', height: 40, marginBottom: '2rem' }} />
+        <div className="pd-skeleton" style={{ width: '40%', height: 16, marginBottom: '2rem' }} />
+        <div className="pd-skeleton" style={{ width: '100%', height: 300, marginBottom: '2rem' }} />
         {[1,2,3,4].map((i) => (
           <div key={i} style={{ marginBottom: '1.5rem' }}>
-            <div className="skeleton-line" style={{ width: `${85 - i * 8}%`, height: '14px', marginBottom: '0.5rem' }} />
-            <div className="skeleton-line" style={{ width: `${70 - i * 8}%`, height: '14px', marginBottom: '0.5rem' }} />
-            <div className="skeleton-line" style={{ width: `${55 - i * 8}%`, height: '14px' }} />
+            <div className="pd-skeleton" style={{ width: `${85 - i * 8}%`, height: 14, marginBottom: '0.5rem' }} />
+            <div className="pd-skeleton" style={{ width: `${70 - i * 8}%`, height: 14, marginBottom: '0.5rem' }} />
+            <div className="pd-skeleton" style={{ width: `${55 - i * 8}%`, height: 14 }} />
           </div>
         ))}
       </div>
@@ -264,10 +265,10 @@ export default function BlogPost({ slug, onBack }) {
 
   if (error || !post) {
     return (
-      <div className="article-error">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ff6b6b" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
-        <p>{error || t('blog.notFound')}</p>
-        <button onClick={onBack} className="article-btn">{t('blog.backToList')}</button>
+      <div className="pd-loading-card pd-error" style={{ minHeight: 0, padding: '48px 24px' }}>
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
+        <p className="pd-error-message" style={{ maxWidth: 'none' }}>{error || t('blog.notFound')}</p>
+        <button onClick={onBack} className="pd-error-btn">{t('blog.backToList')}</button>
       </div>
     );
   }
@@ -281,24 +282,13 @@ export default function BlogPost({ slug, onBack }) {
 
   return (
     <>
-      <div className="article-progress" ref={progressRef} />
+      <div className="pd-progress"><div className="pd-progress-bar" ref={progressRef} /></div>
       <SeoHelmet title={post.title} description={post.excerpt || post.content?.slice(0, 160)} image={post.imageUrl} url={pageUrl} type="article" />
 
-      <article className="article">
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(12, 1fr)',
-          width: '100%',
-          paddingLeft: 'var(--margin-x, 16px)',
-          paddingRight: 'var(--margin-x, 16px)',
-        }} className="post-detail-grid">
-          <div style={{ gridColumn: 'span 12', paddingTop: 24 }} className="post-detail-main">
-            <div style={{
-              background: '#fff',
-              border: '1px solid #e2e8f0',
-              borderRadius: 10,
-              padding: 16,
-            }} className="post-detail-card">
+      <article>
+        <div className="pd-grid" style={{ paddingTop: 24 }}>
+          <div className="pd-main">
+            <div className="pd-card pd-card-body" style={{ paddingBottom: 16 }}>
               <PostDetailHeader
                 author={post.author || post.authorName || 'نویسنده'}
                 avatar={post.authorAvatar || '/images/avatar/avatar-19.jpg'}
@@ -314,14 +304,14 @@ export default function BlogPost({ slug, onBack }) {
 
             <RecentArticlesList t={t} />
 
-            <div className="article-body" style={{ maxWidth: 'none', padding: '0 0 24px' }}>
+            <div style={{ maxWidth: 'none', padding: '0 0 24px' }}>
               <Comments postId={post.id} t={t} i18n={i18n} />
               <Newsletter t={t} i18n={i18n} />
             </div>
           </div>
 
-          <div style={{ gridColumn: 'span 12', paddingTop: 24, paddingBottom: 24 }} className="post-detail-sidebar">
-            <div style={{ position: 'sticky', top: 80 }}>
+          <div className="pd-sidebar" style={{ paddingBottom: 24 }}>
+            <div className="pd-sticky">
               <AuthorInfoCard t={t} author={post.author} />
               <AuthorPostsList t={t} authorName={post.author} />
             </div>
@@ -329,20 +319,20 @@ export default function BlogPost({ slug, onBack }) {
         </div>
 
         {related.length > 0 && (
-          <section className="article-related">
-            <h2 className="article-related__title">{isRtl ? 'مطالب مرتبط' : 'Related Posts'}</h2>
-            <div className="article-related__grid">
+          <section className="pd-related" style={{ maxWidth: 1280, margin: '40px auto', padding: '0 16px' }}>
+            <h2 className="pd-comments-title">{isRtl ? 'مطالب مرتبط' : 'Related Posts'}</h2>
+            <div className="pd-related">
               {related.map((rp) => (
-                <button key={rp.id} onClick={() => { window.location.hash = `blog/post/${rp.slug}`; window.scrollTo(0, 0); }} className="article-related__card">
+                <button key={rp.id} onClick={() => { window.location.hash = `blog/post/${rp.slug}`; window.scrollTo(0, 0); }} className="pd-related-card">
                   {rp.imageUrl && (
-                    <div className="article-related__img"><img src={rp.imageUrl} alt={rp.title} /></div>
+                    <img className="pd-related-thumb" src={rp.imageUrl} alt={rp.title} />
                   )}
-                  <div className="article-related__body">
-                    <h3 className="article-related__card-title">{rp.title}</h3>
-                    {rp.excerpt && <p className="article-related__excerpt">{rp.excerpt}</p>}
+                  <div className="pd-related-info">
+                    <h3 className="pd-related-card-title">{rp.title}</h3>
+                    {rp.excerpt && <p className="pd-article-description" style={{ marginTop: 4 }}>{rp.excerpt}</p>}
                     {rp.tags && (
-                      <div className="article-related__tags">
-                        {rp.tags.split(',').slice(0, 3).map((tag, i) => <span key={i} className="article-related__tag">#{tag.trim()}</span>)}
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 8 }}>
+                        {rp.tags.split(',').slice(0, 3).map((tag, i) => <span key={i} className="pd-related-tag">#{tag.trim()}</span>)}
                       </div>
                     )}
                   </div>
@@ -353,95 +343,7 @@ export default function BlogPost({ slug, onBack }) {
         )}
       </article>
 
-      {showBackTop && <button className="article-back-top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="Back to top"><ArrowUpIcon /></button>}
-
-        <style>{`
-        .article-progress { position: fixed; top: 0; left: 0; height: 3px; background: #6366f1; z-index: 9999; transition: width 0.1s; }
-        .article-loading { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 24px; margin: 24px 0; }
-        .skeleton-line { height: 14px; border-radius: 6px; background: linear-gradient(90deg, #e9eef5 25%, #f1f5f9 50%, #e9eef5 75%); background-size: 200% 100%; animation: skeleton-shimmer 1.5s infinite; }
-        @keyframes skeleton-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-        .article-error { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 48px 24px; margin: 24px 0; text-align: center; color: #475569; font-size: 1.6rem; }
-        .article-error button { margin-top: 8px; }
-        .article-comments { margin-top: 32px; }
-        .article-comments__title { display: flex; align-items: center; gap: 8px; font-size: 2rem; font-weight: 600; color: #0f172a; margin-bottom: 24px; }
-        .article-comments__count { display: inline-flex; align-items: center; justify-content: center; min-width: 28px; height: 28px; border-radius: 999px; background: #e9eef5; color: #475569; font-size: 1.2rem; font-weight: 600; padding: 0 8px; }
-        .article-comments__empty { color: #94a3b8; font-size: 1.4rem; text-align: center; padding: 32px 0; }
-        .article-comment { display: flex; gap: 12px; padding: 16px 0; border-bottom: 1px solid #e2e8f0; }
-        .article-comment:first-of-type { padding-top: 0; }
-        .article-comment:last-of-type { border-bottom: none; }
-        .article-comment__avatar { width: 40px; height: 40px; border-radius: 50%; background: #6366f1; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.4rem; flex-shrink: 0; }
-        .article-comment__body { flex: 1; min-width: 0; }
-        .article-comment__head { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
-        .article-comment__name { font-weight: 600; color: #1e293b; font-size: 1.4rem; }
-        .article-comment__date { color: #94a3b8; font-size: 1.2rem; }
-        .article-comment__body p { color: #475569; font-size: 1.4rem; line-height: 1.7; }
-        .article-comments__form { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
-        .article-input { width: 100%; padding: 10px 14px; border: 1px solid #cbd5e1; border-radius: 8px; background: #fff; color: #1e293b; font-family: inherit; font-size: 1.4rem; transition: border-color 0.15s; outline: none; }
-        .article-input:focus { border-color: #6366f1; }
-        .article-input::placeholder { color: #94a3b8; }
-        .article-btn { display: inline-flex; align-items: center; justify-content: center; padding: 8px 20px; border: none; border-radius: 8px; background: #f1f5f9; color: #475569; font-family: inherit; font-size: 1.4rem; font-weight: 500; cursor: pointer; transition: background 0.15s, opacity 0.15s; }
-        .article-btn:hover { background: #e2e8f0; }
-        .article-btn--primary { background: #6366f1; color: #fff; }
-        .article-btn--primary:hover { background: #4f46e5; }
-        .article-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-        .article-newsletter { margin-top: 32px; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 24px; display: flex; gap: 16px; align-items: flex-start; }
-        .article-newsletter__icon { width: 48px; height: 48px; border-radius: 12px; background: #eef2ff; color: #6366f1; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .article-newsletter__body { flex: 1; }
-        .article-newsletter__title { font-size: 1.8rem; font-weight: 600; color: #0f172a; margin-bottom: 4px; }
-        .article-newsletter__desc { color: #64748b; font-size: 1.4rem; margin-bottom: 16px; }
-        .article-newsletter__form { display: flex; flex-direction: column; gap: 12px; }
-        .article-related { margin-top: 40px; }
-        .article-related__title { font-size: 2rem; font-weight: 600; color: #0f172a; margin-bottom: 20px; }
-        .article-related__grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-        .article-related__card { display: flex; flex-direction: column; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; cursor: pointer; text-align: left; width: 100%; font-family: inherit; transition: border-color 0.15s; }
-        .article-related__card:hover { border-color: #6366f1; }
-        .article-related__img { width: 100%; height: 180px; overflow: hidden; }
-        .article-related__img img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-        .article-related__body { padding: 16px; }
-        .article-related__card-title { font-size: 1.6rem; font-weight: 600; color: #1e293b; margin-bottom: 8px; }
-        .article-related__excerpt { color: #64748b; font-size: 1.3rem; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 12px; }
-        .article-related__tags { display: flex; flex-wrap: wrap; gap: 6px; }
-        .article-related__tag { display: inline-block; padding: 2px 8px; border-radius: 4px; background: #eef2ff; color: #6366f1; font-size: 1.1rem; font-weight: 500; }
-        .article-back-top { position: fixed; bottom: 24px; right: 24px; width: 40px; height: 40px; border-radius: 50%; background: #fff; border: 1px solid #e2e8f0; color: #6366f1; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.08); z-index: 100; transition: box-shadow 0.15s; }
-        .article-back-top:hover { box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
-        @media (min-width: 640px) { .article-related__grid { grid-template-columns: 1fr 1fr; } }
-        @media (min-width: 1024px) {
-          .post-detail-grid { gap: 24px; }
-          .post-detail-main { grid-column: span 8 !important; padding-bottom: 24px !important; }
-          .post-detail-sidebar { grid-column: 9 / 13 !important; align-self: start !important; }
-          .post-detail-card { padding: 24px !important; }
-        }
-        .dark .post-detail-card { background: #1c1d21 !important; border-color: #232429 !important; }
-        .dark .article-loading { background: #1c1d21; border-color: #232429; }
-        .dark .skeleton-line { background: linear-gradient(90deg, #2a2c32 25%, #384766 50%, #2a2c32 75%); background-size: 200% 100%; }
-        .dark .article-error { background: #1c1d21; border-color: #232429; color: #b7bac4; }
-        .dark .article-comments__title { color: #e6e7eb; }
-        .dark .article-comments__count { background: #2a2c32; color: #b7bac4; }
-        .dark .article-comments__empty { color: #838794; }
-        .dark .article-comment { border-bottom-color: #232429; }
-        .dark .article-comment__name { color: #d0d2db; }
-        .dark .article-comment__date { color: #838794; }
-        .dark .article-comment__body p { color: #b7bac4; }
-        .dark .article-input { background: #15161a; border-color: #2a2c32; color: #d0d2db; }
-        .dark .article-input:focus { border-color: #818cf8; }
-        .dark .article-input::placeholder { color: #838794; }
-        .dark .article-btn { background: #232429; color: #b7bac4; }
-        .dark .article-btn:hover { background: #2a2c32; }
-        .dark .article-btn--primary { background: #818cf8; color: #fff; }
-        .dark .article-btn--primary:hover { background: #6366f1; }
-        .dark .article-newsletter { background: #1c1d21; border-color: #232429; }
-        .dark .article-newsletter__icon { background: #232429; color: #818cf8; }
-        .dark .article-newsletter__title { color: #e6e7eb; }
-        .dark .article-newsletter__desc { color: #838794; }
-        .dark .article-related__title { color: #e6e7eb; }
-        .dark .article-related__card { background: #1c1d21; border-color: #232429; }
-        .dark .article-related__card:hover { border-color: #818cf8; }
-        .dark .article-related__card-title { color: #d0d2db; }
-        .dark .article-related__excerpt { color: #838794; }
-        .dark .article-related__tag { background: #232429; color: #818cf8; }
-        .dark .article-back-top { background: #1c1d21; color: #818cf8; border-color: #232429; box-shadow: none; }
-        .dark .article-back-top:hover { box-shadow: 0 6px 16px rgba(0,0,0,0.3); }
-      `}</style>
+      <button className={`pd-back-to-top${showBackTop ? ' visible' : ''}`} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="Back to top"><ArrowUpIcon /></button>
     </>
   );
 }
