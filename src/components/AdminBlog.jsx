@@ -195,7 +195,7 @@ export default function AdminBlog({ token, onUnauthorized }) {
             <button type="submit" disabled={sending} style={{
               flex: 1, padding: '1.2rem', borderRadius: '8px', border: 'none',
               background: '#00FF94', color: '#111', fontFamily: 'inherit',
-              fontSize: '1.5rem', fontWeight: 800, cursor: sending ? 'not-allowed' : 'pointer',
+              fontSize: '1.5rem', fontWeight: 700, cursor: sending ? 'not-allowed' : 'pointer',
               opacity: sending ? 0.6 : 1,
             }}>{sending ? 'Saving...' : 'Save'}</button>
             <button type="button" onClick={() => setShowForm(false)} style={{
@@ -212,7 +212,7 @@ export default function AdminBlog({ token, onUnauthorized }) {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-        <h2 style={{ fontSize: '2.2rem', fontWeight: 800, color: '#fff' }}>Blog</h2>
+        <h2 style={{ fontSize: '2.2rem', fontWeight: 700, color: '#fff' }}>Blog</h2>
         <button onClick={openCreate} style={{
           display: 'flex', alignItems: 'center', gap: '0.5rem',
           padding: '0.8rem 1.6rem', borderRadius: '8px', border: 'none',

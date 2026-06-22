@@ -248,7 +248,7 @@ const styles = {
   },
   title: {
     fontSize: '2.2rem',
-    fontWeight: 800,
+    fontWeight: 700,
     color: '#fff',
     letterSpacing: '-0.02em',
   },
@@ -295,7 +295,7 @@ const styles = {
     color: '#111',
     fontFamily: 'inherit',
     fontSize: '1.6rem',
-    fontWeight: 800,
+    fontWeight: 700,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

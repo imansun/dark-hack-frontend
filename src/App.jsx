@@ -9,7 +9,6 @@ import Works from './components/Works.jsx';
 import Blog from './components/Blog.jsx';
 import BlogPost from './components/BlogPost.jsx';
 import Contact from './components/Contact.jsx';
-import GitHubContributions from './components/GitHubContributions.jsx';
 import Footer from './components/Footer.jsx';
 import AdminDashboard from './components/AdminDashboard.jsx';
 import AdminLogin from './components/AdminLogin.jsx';
@@ -221,7 +220,6 @@ export default function App() {
             <Works />
             <Blog onViewPost={handleViewPost} />
             <Contact />
-            <GitHubContributions />
           </>
         )}
       </main>

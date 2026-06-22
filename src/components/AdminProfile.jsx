@@ -83,7 +83,7 @@ export default function AdminProfile({ token, onUnauthorized }) {
 
   return (
     <div>
-      <h2 style={{ fontSize: '2.2rem', fontWeight: 800, color: '#fff', marginBottom: '2.5rem' }}>Profile Settings</h2>
+      <h2 style={{ fontSize: '2.2rem', fontWeight: 700, color: '#fff', marginBottom: '2.5rem' }}>Profile Settings</h2>
       <form onSubmit={handleSubmit} style={{ maxWidth: '700px' }}>
         <div style={{ background: '#141414', borderRadius: '12px', padding: '2rem', marginBottom: '2rem', border: '1px solid #222' }}>
           <h3 style={{ fontSize: '1.6rem', fontWeight: 700, color: '#00FF94', marginBottom: '1.5rem' }}>Name & Title</h3>
@@ -126,7 +126,7 @@ export default function AdminProfile({ token, onUnauthorized }) {
             style={{
               padding: '1.2rem 3rem', borderRadius: '8px', border: 'none',
               background: '#00FF94', color: '#111', fontFamily: 'inherit',
-              fontSize: '1.5rem', fontWeight: 800, cursor: saving ? 'not-allowed' : 'pointer',
+              fontSize: '1.5rem', fontWeight: 700, cursor: saving ? 'not-allowed' : 'pointer',
               opacity: saving ? 0.6 : 1,
             }}
           >

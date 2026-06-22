@@ -33,7 +33,7 @@ export default function AdminContacts({ token, onUnauthorized }) {
 
   return (
     <div>
-      <h2 style={{ fontSize: '2.2rem', fontWeight: 800, color: '#fff', marginBottom: '2rem' }}>Messages</h2>
+      <h2 style={{ fontSize: '2.2rem', fontWeight: 700, color: '#fff', marginBottom: '2rem' }}>Messages</h2>
 
       {loading ? (
         <div style={{ textAlign: 'center', padding: '3rem', color: '#666' }}>Loading...</div>

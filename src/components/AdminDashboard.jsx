@@ -54,7 +54,7 @@ export default function AdminDashboard({ token, onLogout }) {
                 <path d="M7 11V7a5 5 0 0 1 10 0v4" />
               </svg>
             </div>
-            <div style={{ fontSize: '1.6rem', fontWeight: 800, color: '#fff', whiteSpace: 'nowrap' }}>Dark<span style={{ color: '#00FF94' }}>Panel</span></div>
+            <div style={{ fontSize: '1.6rem', fontWeight: 700, color: '#fff', whiteSpace: 'nowrap' }}>Dark<span style={{ color: '#00FF94' }}>Panel</span></div>
           </div>
         </div>
 
@@ -69,7 +69,7 @@ export default function AdminDashboard({ token, onLogout }) {
                 background: activeTab === item.key ? 'rgba(0,255,148,0.08)' : 'transparent',
                 borderRight: activeTab === item.key ? `3px solid #00FF94` : '3px solid transparent',
                 borderLeft: isRtl && activeTab === item.key ? `3px solid #00FF94` : isRtl ? '3px solid transparent' : 'none',
-                fontFamily: 'inherit', fontSize: '1.4rem', fontWeight: activeTab === item.key ? 700 : 500,
+                fontFamily: 'inherit', fontSize: '1.4rem', fontWeight: activeTab === item.key ? 700 : 400,
                 color: activeTab === item.key ? '#00FF94' : '#666',
                 transition: 'all 0.15s',
               }}

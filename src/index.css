@@ -1,62 +1,3 @@
-@font-face {
-  font-family: 'Avid';
-  src: url('/fonts/avid.woff2') format('woff2'),
-       url('/fonts/avid.woff') format('woff'),
-       url('/fonts/avid.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'DigiVorojak';
-  src: url('/fonts/DigiVorojakBold.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Lombok';
-  src: url('/fonts/Lombok.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Pikaar';
-  src: url('/fonts/pikaar.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Divar';
-  src: url('/fonts/divar.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Arad';
-  src: url('/fonts/Arad-Regular.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Dabestan';
-  src: url('/fonts/Dabestan-Bold.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Arad';
-  src: url('/fonts/Arad-Bold.woff2') format('woff2');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -114,17 +55,41 @@ body {
     background-color: #111111;
     position: relative;
     height: 100%;
-    line-height: 1.8;
+    line-height: 1.5;
     font-size: 1.6rem;
-    font-family: 'Divar', 'Arad', 'Vazirmatn', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: 'Dabestan Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
     direction: rtl;
 }
-button, input, select, textarea, [role="button"] {
-    font-family: 'Divar', 'Arad', 'Vazirmatn', sans-serif;
+
+@font-face {
+    font-family: 'Dabestan Pro';
+    src: url('/fonts/Dabestan-Pro-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
 }
+@font-face {
+    font-family: 'Dabestan Pro';
+    src: url('/fonts/Dabestan-Pro-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Dabestan Pro';
+    src: url('/fonts/Dabestan-Pro-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
 #root {
     height: 100%;
 }
+button, input, select, textarea, [role="button"] {
+    font-family: 'Dabestan Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+}
+
 .container {
     display: block;
     margin-left: auto;
@@ -141,10 +106,9 @@ button, input, select, textarea, [role="button"] {
     margin-bottom: 0;
 }
 .section__title{
-    font-weight: 800;
+    font-weight: 700;
     font-size: 5rem;
     position: relative;
-    font-family: 'DigiVorojak', sans-serif;
 }
 .section__title::before{
     content: '';
@@ -179,14 +143,13 @@ button, input, select, textarea, [role="button"] {
 .nav__list-link {
     color: #688277;
     position: relative;
-    font-weight: 800;
+    font-weight: 700;
     text-decoration: none;
     outline: none;
     font-size: 2rem;
     cursor: pointer;
     background: none;
     border: none;
-    font-family: inherit;
 }
 .nav__list-link::before {
     content: '';
@@ -301,21 +264,13 @@ button, input, select, textarea, [role="button"] {
 }
 .header__title{
     text-transform: uppercase;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 5rem;
     line-height: 1;
     display: flex;
     flex-direction: column;
 }
 
-.header__sup-text {
-    font-family: 'Avid', 'Vazirmatn', 'IBM Plex Mono', ui-monospace, monospace;
-}
-
-.header__title-1,
-.header__title-2 {
-    font-family: 'Avid', 'Vazirmatn', 'IBM Plex Mono', ui-monospace, monospace;
-}
 .header__title-1,
 .header__title-2{
     display: block;
@@ -497,7 +452,7 @@ button, input, select, textarea, [role="button"] {
     pointer-events: none;
 }
 .service-card__title{
-    font-weight: 800;
+    font-weight: 700;
     font-size: 2rem;
     color: #00FF94;
     margin-top: 2rem;
@@ -733,51 +688,6 @@ button, input, select, textarea, [role="button"] {
     transform-origin: center;
     transition: all .35s ease-in-out;
 }
-.github-contrib {
-    padding-bottom: 2rem;
-}
-.github-contrib .section__title {
-    font-family: 'Dabestan', 'DigiVorojak', sans-serif;
-}
-.github-contrib__box {
-    margin-top: 5rem;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    min-height: 100px;
-}
-.github-contrib__svg {
-    width: 100%;
-    max-width: 720px;
-    overflow-x: auto;
-    padding: 2rem;
-    background: #0a0a0a;
-    border: 1px solid #1a1a1a;
-    border-radius: 12px;
-}
-.github-contrib__skeleton {
-    width: 100%;
-    max-width: 720px;
-    height: 110px;
-    border-radius: 12px;
-    background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-}
-.github-contrib__error {
-    color: #ff6b6b;
-    text-align: center;
-    font-size: 1.4rem;
-}
-.github-contrib__svg svg text {
-    fill: #888 !important;
-    font-size: 11px !important;
-    font-family: 'Dabestan', 'Arad', sans-serif !important;
-}
-.github-contrib__svg svg rect[fill="#ebedf0"],
-.github-contrib__svg svg rect[fill="#f0f0f0"] {
-    fill: #1a1a1a !important;
-}
 
 .footer{
     font-size: 1.4rem;
@@ -788,12 +698,8 @@ button, input, select, textarea, [role="button"] {
     padding-top: 1.3rem;
     padding-bottom: 1.3rem;
 }
-.footer__credit {
-    font-family: 'Pikaar', 'Arad', 'Vazirmatn', sans-serif;
-}
 .footer__link{
     color: #64fcd9;
-    font-family: 'Lombok', sans-serif;
     font-size: 1.1em;
 }
 @media only screen and (min-width: 36em) {
@@ -1266,7 +1172,7 @@ input:-webkit-autofill:focus {
 }
 .blog__card-title {
     font-size: 1.7rem;
-    font-weight: 800;
+    font-weight: 700;
     color: #fff;
     line-height: 1.4;
     margin-bottom: 0.6rem;
@@ -1469,7 +1375,7 @@ input:-webkit-autofill:focus {
     background: #00FF94;
     border-color: #00FF94;
     color: #111;
-    font-weight: 800;
+    font-weight: 700;
 }
 .blog__page-btn--active:hover {
     color: #111;
@@ -1632,7 +1538,7 @@ input:-webkit-autofill:focus {
 }
 .article-hero__title {
     font-size: 3.4rem;
-    font-weight: 800;
+    font-weight: 700;
     color: #fff;
     line-height: 1.15;
     margin-bottom: 1.2rem;
@@ -1664,7 +1570,7 @@ input:-webkit-autofill:focus {
 .article-hero__tag {
     color: #555;
     font-size: 1.05rem;
-    font-weight: 500;
+    font-weight: 400;
     transition: color 0.15s;
 }
 .article-hero__tag:hover {
@@ -1920,7 +1826,7 @@ input:-webkit-autofill:focus {
     align-items: center;
     justify-content: center;
     font-size: 1.4rem;
-    font-weight: 800;
+    font-weight: 700;
     flex-shrink: 0;
 }
 .article-author__name {
@@ -2135,7 +2041,7 @@ textarea.article-input {
 }
 .article-related__title {
     font-size: 2rem;
-    font-weight: 800;
+    font-weight: 700;
     color: #fff;
     margin-bottom: 2rem;
 }
