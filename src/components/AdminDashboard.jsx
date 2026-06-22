@@ -5,13 +5,19 @@ import AdminProfile from './AdminProfile';
 import AdminServices from './AdminServices';
 import AdminContacts from './AdminContacts';
 import AdminBlog from './AdminBlog';
+import AdminCategories from './AdminCategories';
+import AdminComments from './AdminComments';
+import AdminSubscribers from './AdminSubscribers';
 
 const NAV_ITEMS = [
   { key: 'profile', labelFa: 'پروفایل', labelEn: 'Profile', icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' },
   { key: 'services', labelFa: 'خدمات', labelEn: 'Services', icon: 'M21.5 8.5L18 5l-3.5 3.5M18 5v11M8.5 15.5L5 19l3.5 3.5M5 19h11M15.5 5.5l3.5-3.5 3.5 3.5M19 2v3h-3M5.5 18.5L2 22l3.5 3.5M2 22h3v-3' },
   { key: 'works', labelFa: 'نمونه‌کارها', labelEn: 'Works', icon: 'M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zM9 3v18M3 9h18' },
   { key: 'blog', labelFa: 'مقالات', labelEn: 'Blog', icon: 'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
-  { key: 'contacts', labelFa: 'پیام‌ها', labelEn: 'Messages', icon: 'M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z' },
+  { key: 'categories', labelFa: 'دسته‌بندی‌ها', labelEn: 'Categories', icon: 'M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z' },
+  { key: 'comments', labelFa: 'نظرات', labelEn: 'Comments', icon: 'M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z' },
+  { key: 'subscribers', labelFa: 'مشترکین', labelEn: 'Subscribers', icon: 'M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 3a4 4 0 100 8 4 4 0 000-8z' },
+  { key: 'contacts', labelFa: 'پیام‌ها', labelEn: 'Messages', icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
 ];
 
 export default function AdminDashboard({ token, onLogout }) {
@@ -131,6 +137,9 @@ export default function AdminDashboard({ token, onLogout }) {
           {activeTab === 'services' && <AdminServices token={token} onUnauthorized={onLogout} />}
           {activeTab === 'works' && <WorkManager token={token} onLogout={onLogout} />}
           {activeTab === 'blog' && <AdminBlog token={token} onUnauthorized={onLogout} />}
+          {activeTab === 'categories' && <AdminCategories token={token} onUnauthorized={onLogout} />}
+          {activeTab === 'comments' && <AdminComments token={token} onUnauthorized={onLogout} />}
+          {activeTab === 'subscribers' && <AdminSubscribers token={token} onUnauthorized={onLogout} />}
           {activeTab === 'contacts' && <AdminContacts token={token} onUnauthorized={onLogout} />}
         </main>
       </div>

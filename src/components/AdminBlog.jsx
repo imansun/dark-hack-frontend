@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useToast } from './Toast';
 
-const EMPTY_FORM = { title: '', title_en: '', title_ar: '', content: '', content_en: '', content_ar: '', excerpt: '', excerpt_en: '', excerpt_ar: '', slug: '', tags: '', imageUrl: '', published: true };
+const EMPTY_FORM = { title: '', title_en: '', title_ar: '', content: '', content_en: '', content_ar: '', excerpt: '', excerpt_en: '', excerpt_ar: '', slug: '', tags: '', imageUrl: '', published: true, categoryId: null };
 
 const inputSx = {
   width: '100%', padding: '0.8rem 1rem', border: '2px solid #2a2a2a', borderRadius: '6px',
@@ -17,8 +17,16 @@ export default function AdminBlog({ token, onUnauthorized }) {
   const [form, setForm] = useState({ ...EMPTY_FORM });
   const [sending, setSending] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [categories, setCategories] = useState([]);
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => { loadCategories(); load(); }, []);
+
+  const loadCategories = () => {
+    fetch('/api/categories')
+      .then((r) => r.json())
+      .then((data) => setCategories(data || []))
+      .catch(() => {});
+  };
 
   const auth = () => ({ Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' });
 
@@ -42,6 +50,7 @@ export default function AdminBlog({ token, onUnauthorized }) {
       content: p.content || '', content_en: p.content_en || '', content_ar: p.content_ar || '',
       excerpt: p.excerpt || '', excerpt_en: p.excerpt_en || '', excerpt_ar: p.excerpt_ar || '',
       slug: p.slug || '', tags: p.tags || '', imageUrl: p.imageUrl || '', published: p.published ?? true,
+      categoryId: p.categoryId || null,
     });
     setShowForm(true);
   };
@@ -122,6 +131,16 @@ export default function AdminBlog({ token, onUnauthorized }) {
                   onBlur={(e) => e.target.style.borderColor = '#2a2a2a'}
                 />
               </div>
+            </div>
+            <div style={{ marginBottom: '1rem' }}>
+              <label style={{ display: 'block', fontSize: '1.2rem', fontWeight: 600, color: '#999', marginBottom: '0.4rem' }}>Category</label>
+              <select name="categoryId" value={form.categoryId || ''} onChange={(e) => setForm({ ...form, categoryId: e.target.value ? Number(e.target.value) : null })}
+                style={{ ...inputSx, cursor: 'pointer', appearance: 'auto' }}>
+                <option value="">-- No category --</option>
+                {categories.map((c) => (
+                  <option key={c.id} value={c.id}>{c.name} ({c.slug})</option>
+                ))}
+              </select>
             </div>
           </div>
 

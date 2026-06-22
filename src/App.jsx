@@ -30,6 +30,9 @@ export default function App() {
     const match = window.location.hash.match(/^#blog\/(.+)$/);
     return match ? match[1] : null;
   });
+  const [blogTag, setBlogTag] = useState(null);
+  const [blogCategory, setBlogCategory] = useState(null);
+  const [blogArchive, setBlogArchive] = useState(false);
   const { t } = useTranslation();
   const navRef = useRef(null);
   const sweetScrollRef = useRef(null);
@@ -117,9 +120,32 @@ export default function App() {
   useEffect(() => {
     const handleHash = () => {
       const hash = window.location.hash;
-      const blogMatch = hash.match(/^#blog\/(.+)$/);
-      if (blogMatch) {
-        setBlogSlug(blogMatch[1]);
+      const blogPostMatch = hash.match(/^#blog\/post\/(.+)$/);
+      const blogTagMatch = hash.match(/^#blog\/tag\/(.+)$/);
+      const blogCatMatch = hash.match(/^#blog\/category\/(.+)$/);
+      const blogArchiveMatch = hash === '#blog/archive';
+
+      setBlogTag(null);
+      setBlogCategory(null);
+      setBlogArchive(false);
+
+      if (blogPostMatch) {
+        setBlogSlug(blogPostMatch[1]);
+        setAdminMode(false);
+        window.scrollTo(0, 0);
+      } else if (blogTagMatch) {
+        setBlogSlug(null);
+        setBlogTag(blogTagMatch[1]);
+        setAdminMode(false);
+        window.scrollTo(0, 0);
+      } else if (blogCatMatch) {
+        setBlogSlug(null);
+        setBlogCategory(blogCatMatch[1]);
+        setAdminMode(false);
+        window.scrollTo(0, 0);
+      } else if (blogArchiveMatch) {
+        setBlogSlug(null);
+        setBlogArchive(true);
         setAdminMode(false);
         window.scrollTo(0, 0);
       } else if (hash === '#admin') {
@@ -145,13 +171,15 @@ export default function App() {
   };
 
   const handleViewPost = (slug) => {
-    window.location.hash = `blog/${slug}`;
+    window.location.hash = `blog/post/${slug}`;
   };
 
   const handleBackToBlog = () => {
     window.location.hash = 'blog';
     setBlogSlug(null);
   };
+
+  const isBlogView = blogSlug || blogTag || blogCategory || blogArchive;
 
   const sectionMeta = {
     heroHeader: { title: null, desc: null },
@@ -165,7 +193,7 @@ export default function App() {
   return (
     <HelmetProvider>
       <SeoHelmet title={currentMeta.title} description={currentMeta.desc} />
-      {!adminMode && !blogSlug && (
+      {!adminMode && !isBlogView && (
         <Navbar
           ref={navRef}
           activeSection={activeSection}
@@ -183,6 +211,8 @@ export default function App() {
           )
         ) : blogSlug ? (
           <BlogPost slug={blogSlug} onBack={handleBackToBlog} />
+        ) : blogTag || blogCategory || blogArchive ? (
+          <Blog onViewPost={handleViewPost} filterTag={blogTag} filterCategory={blogCategory} />
         ) : (
           <>
             <Hero paddingTop={menuOpen ? 0 : undefined} navRef={navRef} />
