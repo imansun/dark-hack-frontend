@@ -93,6 +93,18 @@
     "cancel": "إلغاء",
     "deleteConfirm": "هل تريد حذف هذا الترخيص؟"
   },
+  "github": {
+    "title": "مساهمات جيت‌هاب",
+    "error": "فشل في جلب بيانات جيت‌هاب"
+  },
+  "terminal": {
+    "about": "مطور ويب شامل شغوف بالتصميم الحديث وتجربة المستخدم الممتازة. متخصص في React و NestJS وتقنيات الويب.",
+    "skills": "المهارات: React, NestJS, TypeScript, MySQL, Docker, Git, HTML/CSS, JavaScript, REST API, UI/UX Design",
+    "projects": "تفقد قسم الأعمال لمشاهدة المشاريع.",
+    "contact": "البريد: imannorouzi@example.com\nقم بزيارة قسم الاتصال لإرسال رسالة.",
+    "social": "GitHub: github.com/ImanNorouziEsfajir",
+    "whoami": "المستخدم: Iman Norouzi Esfajir\nالدور: مطور ويب شامل\nالحالة: نشط"
+  },
   "language": {
     "fa": "فارسی",
     "en": "English",

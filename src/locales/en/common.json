@@ -93,6 +93,18 @@
     "cancel": "Cancel",
     "deleteConfirm": "Delete this license?"
   },
+  "github": {
+    "title": "GitHub Contributions",
+    "error": "Failed to fetch GitHub data"
+  },
+  "terminal": {
+    "about": "Full-stack developer passionate about modern design and great UX. Specializing in React, NestJS, and web technologies.",
+    "skills": "Skills: React, NestJS, TypeScript, MySQL, Docker, Git, HTML/CSS, JavaScript, REST API, UI/UX Design",
+    "projects": "Check the Works section to see my projects.",
+    "contact": "Email: imannorouzi@example.com\nVisit the Contact section to send a message.",
+    "social": "GitHub: github.com/ImanNorouziEsfajir",
+    "whoami": "User: Iman Norouzi Esfajir\nRole: Full-stack Developer\nStatus: Active"
+  },
   "language": {
     "fa": "فارسی",
     "en": "English",

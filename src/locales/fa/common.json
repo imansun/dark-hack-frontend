@@ -93,6 +93,18 @@
     "cancel": "انصراف",
     "deleteConfirm": "آیا این مجوز حذف شود؟"
   },
+  "github": {
+    "title": "مشارکت‌های گیت‌هاب",
+    "error": "خطا در دریافت اطلاعات گیت‌هاب"
+  },
+  "terminal": {
+    "about": "توسعه‌دهنده فول‌استک با علاقه به طراحی مدرن و تجربه کاربری عالی. متخصص در React، NestJS و تکنولوژی‌های وب.",
+    "skills": "مهارت‌ها: React, NestJS, TypeScript, MySQL, Docker, Git, HTML/CSS, JavaScript, REST API, UI/UX Design",
+    "projects": "برای مشاهده پروژه‌ها به بخش Works مراجعه کنید.",
+    "contact": "ایمیل: imannorouzi@example.com\nجهت ارسال پیام، به بخش Contact در پایین صفحه مراجعه کنید.",
+    "social": "GitHub: github.com/ImanNorouziEsfajir",
+    "whoami": "کاربر: Iman Norouzi Esfajir\nنقش: توسعه‌دهنده فول‌استک\nوضعیت: فعال"
+  },
   "language": {
     "fa": "فارسی",
     "en": "English",

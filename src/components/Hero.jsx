@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import TerminalHero from './TerminalHero.jsx';
 
 export default function Hero({ navRef }) {
   const { t, i18n } = useTranslation();
@@ -41,7 +42,7 @@ export default function Hero({ navRef }) {
           ) : null}
         </div>
         <div className="header__right">
-          <img src="/assets/illustrations/header.svg" alt="" />
+          <TerminalHero profile={profile} />
         </div>
       </section>
       <span className="header__bg"></span>
