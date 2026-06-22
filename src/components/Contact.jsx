@@ -1,31 +1,39 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import TurnstileWidget from './TurnstileWidget';
+import { useToast } from './Toast';
 
 export default function Contact() {
   const { t } = useTranslation();
+  const { success, error: toastError } = useToast();
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
-  const [status, setStatus] = useState(null);
+  const [sending, setSending] = useState(false);
+  const turnstileRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus('sending');
+    if (sending) return;
+    setSending(true);
+    const token = await turnstileRef.current?.execute();
+    if (!token) { setSending(false); toastError(t('contact.error')); return; }
     try {
       const res = await fetch('/api/contacts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, message }),
+        body: JSON.stringify({ name, message, turnstileToken: token }),
       });
       if (res.ok) {
-        setStatus('success');
+        success(t('contact.success'));
         setName('');
         setMessage('');
       } else {
-        setStatus('error');
+        toastError(t('contact.error'));
       }
     } catch {
-      setStatus('error');
+      toastError(t('contact.error'));
     }
+    setSending(false);
   };
 
   return (
@@ -54,10 +62,10 @@ export default function Contact() {
               required
             />
           </div>
-          <button type="submit" className="contact__submit-btn">{t('contact.submit')}</button>
-          {status === 'sending' && <p style={{ marginTop: '1rem', textAlign: 'center', color: '#00FF94' }}>{t('contact.sending')}</p>}
-          {status === 'success' && <p style={{ marginTop: '1rem', textAlign: 'center', color: '#00FF94' }}>{t('contact.success')}</p>}
-          {status === 'error' && <p style={{ marginTop: '1rem', textAlign: 'center', color: '#ff6b6b' }}>{t('contact.error')}</p>}
+          <TurnstileWidget ref={turnstileRef} />
+          <button type="submit" className="contact__submit-btn" disabled={sending}>
+            {sending ? t('contact.sending') : t('contact.submit')}
+          </button>
         </form>
         <span className="contact__illustration">
           <img src="/assets/illustrations/connect.svg" alt={t('contact.title')} />
