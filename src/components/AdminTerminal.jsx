@@ -251,32 +251,21 @@ export default function AdminTerminal() {
               marginLeft: '2px', flexShrink: 0,
             }}></span>
           </div>
-          {showHints && filteredHints.length > 0 && (
-            <div style={{
-              position: 'absolute', bottom: '100%', left: '14px', right: '14px',
-              background: '#141414', border: '1px solid #2a2a2a', borderRadius: '8px',
-              maxHeight: '240px', overflowY: 'auto', zIndex: 10,
-            }}>
-              {filteredHints.map((cmd) => (
-                <div
-                  key={cmd.id}
-                  onClick={() => hintClick(cmd)}
-                  style={{
-                    display: 'flex', alignItems: 'center', gap: '1rem',
-                    padding: '0.6rem 1rem', cursor: 'pointer',
-                    borderBottom: '1px solid #222',
-                    transition: 'background 0.1s',
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.background = '#1a1a1a'}
-                  onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
-                >
-                  <span style={{ color: '#00FF94', fontWeight: 700, fontSize: '1.1rem', minWidth: '100px' }}>{cmd.command}</span>
-                  <span style={{ color: '#888', fontSize: '1rem' }}>{isRtl ? cmd.description : cmd.descriptionEn}</span>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
+        {showHints && filteredHints.length > 0 && (
+          <div className="term-hints" style={{ margin: '0 14px 14px' }}>
+            {filteredHints.map((cmd) => (
+              <div
+                key={cmd.id}
+                className="term-hints-item"
+                onClick={() => hintClick(cmd)}
+              >
+                <span className="term-hints-cmd">{cmd.command}</span>
+                <span className="term-hints-desc">{isRtl ? cmd.description : cmd.descriptionEn}</span>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

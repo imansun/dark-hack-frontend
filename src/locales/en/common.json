@@ -15,6 +15,8 @@
   },
   "works": {
     "title": "Licenses",
+    "subtitle": "Professional certifications and licenses earned through years of expertise.",
+    "viewProject": "View License",
     "loading": "Loading...",
     "error": "Failed to load licenses."
   },
@@ -58,6 +60,7 @@
   },
   "login": {
     "title": "Admin Login",
+    "subtitle": "sign in to continue",
     "username": "Username",
     "usernamePlaceholder": "Enter your username",
     "password": "Password",
@@ -92,6 +95,17 @@
     "saving": "Saving...",
     "cancel": "Cancel",
     "deleteConfirm": "Delete this license?"
+  },
+  "recentArticles": {
+    "title": "Recent Articles",
+    "viewAll": "View All"
+  },
+  "authorInfo": {
+    "follow": "Follow",
+    "followers": "followers"
+  },
+  "authorPosts": {
+    "title": "More from {author}"
   },
   "github": {
     "title": "GitHub Contributions",

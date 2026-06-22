@@ -15,6 +15,8 @@
   },
   "works": {
     "title": "التراخيص",
+    "subtitle": "الشهادات والتراخيص المهنية المكتسبة عبر سنوات من الخبرة.",
+    "viewProject": "عرض الترخيص",
     "loading": "جارٍ التحميل...",
     "error": "فشل في تحميل التراخيص."
   },
@@ -58,6 +60,7 @@
   },
   "login": {
     "title": "تسجيل الدخول للمشرف",
+    "subtitle": "سجل الدخول للمتابعة",
     "username": "اسم المستخدم",
     "usernamePlaceholder": "أدخل اسم المستخدم",
     "password": "كلمة المرور",
@@ -92,6 +95,17 @@
     "saving": "جارٍ الحفظ...",
     "cancel": "إلغاء",
     "deleteConfirm": "هل تريد حذف هذا الترخيص؟"
+  },
+  "recentArticles": {
+    "title": "المقالات الأخيرة",
+    "viewAll": "عرض الكل"
+  },
+  "authorInfo": {
+    "follow": "متابعة",
+    "followers": "متابع"
+  },
+  "authorPosts": {
+    "title": "المزيد من {author}"
   },
   "github": {
     "title": "مساهمات جيت‌هاب",

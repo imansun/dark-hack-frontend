@@ -142,62 +142,68 @@ export default function TerminalHero({ profile }) {
     handleCommand(cmd.command);
   };
 
+  const copyTerminal = () => {
+    const text = lines.map((l) => l.text).join('\n');
+    if (text) navigator.clipboard?.writeText(text);
+  };
+
   return (
-    <div className="terminal" onClick={() => inputRef.current?.focus()}>
-      <div className="terminal__header">
-        <span className="terminal__dot terminal__dot--red"></span>
-        <span className="terminal__dot terminal__dot--yellow"></span>
-        <span className="terminal__dot terminal__dot--green"></span>
-        <span className="terminal__title">portfolio@imannorouzi:~$</span>
-      </div>
-      <div className="terminal__body" ref={terminalRef}>
-        {lines.map((line, i) => (
-          <div key={i} className={`terminal__line terminal__line--${line.type}`}>
-            {line.type === 'input' && <span className="terminal__prompt">{'$'}</span>}
-            <span>{line.text}</span>
-          </div>
-        ))}
-        {bootDone && (
-          <div className="terminal__line terminal__line--input" style={{ position: 'relative' }}>
-            <span className="terminal__prompt">{'$'}</span>
-            <input
-              ref={inputRef}
-              className="terminal__input"
-              type="text"
-              value={input}
-              onChange={handleInputChange}
-              onKeyDown={handleKeyDown}
-              spellCheck={false}
-              autoComplete="off"
-            />
-            <span className="terminal__cursor"></span>
-            {showHints && filteredHints.length > 0 && (
-              <div style={{
-                position: 'absolute', bottom: '100%', left: 0, right: 0,
-                background: '#141414', border: '1px solid #2a2a2a', borderRadius: '8px',
-                maxHeight: '240px', overflowY: 'auto', zIndex: 10,
-              }}>
-                {filteredHints.map((cmd) => (
-                  <div
-                    key={cmd.id}
-                    onClick={() => hintClick(cmd)}
-                    style={{
-                      display: 'flex', alignItems: 'center', gap: '1rem',
-                      padding: '0.6rem 1rem', cursor: 'pointer',
-                      borderBottom: '1px solid #222',
-                      transition: 'background 0.1s',
-                    }}
-                    onMouseEnter={(e) => e.currentTarget.style.background = '#1a1a1a'}
-                    onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
-                  >
-                    <span style={{ color: '#00FF94', fontWeight: 700, fontSize: '1.1rem', minWidth: '100px' }}>{cmd.command}</span>
-                    <span style={{ color: '#888', fontSize: '1rem' }}>{isRtl ? cmd.description : cmd.descriptionEn}</span>
-                  </div>
-                ))}
+    <div className="term-card">
+      <div className="term-wrap">
+        <div className="term-terminal" onClick={() => inputRef.current?.focus()}>
+          <hgroup className="term-head">
+            <p className="term-title">
+              <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth={2} stroke="currentColor" fill="none">
+                <path d="M7 15L10 12L7 9M13 15H17M7.8 21H16.2C17.8802 21 18.7202 21 19.362 20.673C19.9265 20.3854 20.3854 19.9265 20.673 19.362C21 18.7202 21 17.8802 21 16.2V7.8C21 6.11984 21 5.27976 20.673 4.63803C20.3854 4.07354 19.9265 3.6146 19.362 3.32698C18.7202 3 17.8802 3 16.2 3H7.8C6.11984 3 5.27976 3 4.63803 3.32698C4.07354 3.6146 3.6146 4.07354 3.32698 4.63803C3 5.27976 3 6.11984 3 7.8V16.2C3 17.8802 3 18.7202 3.32698 19.362C3.6146 19.9265 4.07354 20.3854 4.63803 20.673C5.27976 21 6.11984 21 7.8 21Z" />
+              </svg>
+              Terminal
+            </p>
+            <button className="term-copy-btn" tabIndex={-1} type="button" onClick={copyTerminal} title={isRtl ? 'کپی' : 'Copy'}>
+              <svg width="16px" height="16px" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth={2} stroke="currentColor" fill="none">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+              </svg>
+            </button>
+          </hgroup>
+          <div className="term-body" ref={terminalRef}>
+            {lines.map((line, i) => (
+              <div key={i} className={`term-line term-line--${line.type}`}>
+                {line.type === 'input' && <span className="term-prompt">{'$'}</span>}
+                <span>{line.text}</span>
+              </div>
+            ))}
+            {bootDone && (
+              <div className="term-line term-line--input" style={{ position: 'relative' }}>
+                <span className="term-prompt">{'$'}</span>
+                <input
+                  ref={inputRef}
+                  className="term-input"
+                  type="text"
+                  value={input}
+                  onChange={handleInputChange}
+                  onKeyDown={handleKeyDown}
+                  spellCheck={false}
+                  autoComplete="off"
+                />
+                <span className="term-cursor"></span>
               </div>
             )}
           </div>
-        )}
+          {showHints && filteredHints.length > 0 && (
+            <div className="term-hints" style={{ margin: '0 14px 14px' }}>
+              {filteredHints.map((cmd) => (
+                <div
+                  key={cmd.id}
+                  className="term-hints-item"
+                  onClick={() => hintClick(cmd)}
+                >
+                  <span className="term-hints-cmd">{cmd.command}</span>
+                  <span className="term-hints-desc">{isRtl ? cmd.description : cmd.descriptionEn}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

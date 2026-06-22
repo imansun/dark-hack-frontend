@@ -17,7 +17,6 @@ export default function AdminLogin({ onLogin, expired }) {
   const [error, setError] = useState('');
   const [errorType, setErrorType] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [focusedField, setFocusedField] = useState(null);
 
   const isRtl = i18n.language === 'fa' || i18n.language === 'ar';
 
@@ -84,106 +83,69 @@ export default function AdminLogin({ onLogin, expired }) {
   return (
     <div style={styles.wrapper}>
       <div style={styles.overlay} />
-      <div
-        style={{
-          ...styles.card,
-          direction: isRtl ? 'rtl' : 'ltr',
-        }}
-      >
-        <div style={styles.header}>
-          <div style={styles.logo}>
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#00FF94" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-            </svg>
-          </div>
-          <h1 style={styles.title}>{t('login.title')}</h1>
+      <div style={{ ...styles.card, direction: isRtl ? 'rtl' : 'ltr' }}>
+        <div className="title" style={styles.title}>
+          {t('login.title')},<br />
+          <span style={styles.titleSpan}>{t('login.subtitle')}</span>
         </div>
 
-        <form onSubmit={handleSubmit} noValidate>
-          <div style={styles.fieldGroup}>
-            <label style={styles.label} htmlFor="loginUser">{t('login.username')}</label>
-            <div
-              style={{
-                ...styles.inputWrapper,
-                borderColor: focusedField === 'user' ? '#00FF94' : errorType === ERR_TYPE.REQUIRED || errorType === ERR_TYPE.SHORT || errorType === ERR_TYPE.INVALID ? '#ff6b6b' : '#333',
-              }}
-            >
-              <svg style={styles.inputIcon} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#688277" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-              <input
-                id="loginUser"
-                type="text"
-                value={username}
-                onChange={(e) => { setUsername(e.target.value); if (error) setError(''); }}
-                onFocus={() => setFocusedField('user')}
-                onBlur={() => setFocusedField(null)}
-                placeholder={t('login.usernamePlaceholder')}
-                autoFocus
-                autoComplete="username"
-                style={styles.input}
-                disabled={loading}
-              />
-            </div>
-          </div>
+        <form onSubmit={handleSubmit} noValidate style={styles.form}>
+          <input
+            type="text"
+            placeholder={t('login.usernamePlaceholder')}
+            name="email"
+            className="input"
+            value={username}
+            onChange={(e) => { setUsername(e.target.value); if (error) setError(''); }}
+            style={{
+              ...styles.input,
+              borderColor: errorType === ERR_TYPE.REQUIRED || errorType === ERR_TYPE.SHORT || errorType === ERR_TYPE.INVALID ? '#ff6b6b' : styles.input.borderColor,
+            }}
+            autoFocus
+            autoComplete="username"
+            disabled={loading}
+          />
+          <input
+            type="password"
+            placeholder={t('login.passwordPlaceholder')}
+            name="password"
+            className="input"
+            value={password}
+            onChange={(e) => { setPassword(e.target.value); if (error) setError(''); }}
+            style={{
+              ...styles.input,
+              borderColor: errorType === ERR_TYPE.REQUIRED || errorType === ERR_TYPE.INVALID ? '#ff6b6b' : styles.input.borderColor,
+            }}
+            autoComplete="current-password"
+            disabled={loading}
+          />
 
-          <div style={styles.fieldGroup}>
-            <label style={styles.label} htmlFor="loginPass">{t('login.password')}</label>
-            <div
-              style={{
-                ...styles.inputWrapper,
-                borderColor: focusedField === 'pass' ? '#00FF94' : errorType === ERR_TYPE.REQUIRED || errorType === ERR_TYPE.INVALID ? '#ff6b6b' : '#333',
-              }}
-            >
-              <svg style={styles.inputIcon} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#688277" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-              </svg>
-              <input
-                id="loginPass"
-                type="password"
-                value={password}
-                onChange={(e) => { setPassword(e.target.value); if (error) setError(''); }}
-                onFocus={() => setFocusedField('pass')}
-                onBlur={() => setFocusedField(null)}
-                placeholder={t('login.passwordPlaceholder')}
-                autoComplete="current-password"
-                style={styles.input}
-                disabled={loading}
-              />
+          <div className="login-with" style={styles.loginWith}>
+            <div className="button-log" style={styles.buttonLog}>&#63743;</div>
+            <div className="button-log" style={styles.buttonLog}>
+              <svg style={styles.icon} height="56.6934px" id="Layer_1" version="1.1" viewBox="0 0 56.6934 56.6934" width="56.6934px" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"><path d="M51.981,24.4812c-7.7173-0.0038-15.4346-0.0019-23.1518-0.001c0.001,3.2009-0.0038,6.4018,0.0019,9.6017  c4.4693-0.001,8.9386-0.0019,13.407,0c-0.5179,3.0673-2.3408,5.8723-4.9258,7.5991c-1.625,1.0926-3.492,1.8018-5.4168,2.139  c-1.9372,0.3306-3.9389,0.3729-5.8713-0.0183c-1.9651-0.3921-3.8409-1.2108-5.4773-2.3649  c-2.6166-1.8383-4.6135-4.5279-5.6388-7.5549c-1.0484-3.0788-1.0561-6.5046,0.0048-9.5805  c0.7361-2.1679,1.9613-4.1705,3.5708-5.8002c1.9853-2.0324,4.5664-3.4853,7.3473-4.0811c2.3812-0.5083,4.8921-0.4113,7.2234,0.294  c1.9815,0.6016,3.8082,1.6874,5.3044,3.1163c1.5125-1.5039,3.0173-3.0164,4.527-4.5231c0.7918-0.811,1.624-1.5865,2.3908-2.4196  c-2.2928-2.1218-4.9805-3.8274-7.9172-4.9056C32.0723,4.0363,26.1097,3.995,20.7871,5.8372  C14.7889,7.8907,9.6815,12.3763,6.8497,18.0459c-0.9859,1.9536-1.7057,4.0388-2.1381,6.1836  C3.6238,29.5732,4.382,35.2707,6.8468,40.1378c1.6019,3.1768,3.8985,6.001,6.6843,8.215c2.6282,2.0958,5.6916,3.6439,8.9396,4.5078  c4.0984,1.0993,8.461,1.0743,12.5864,0.1355c3.7284-0.8581,7.256-2.6397,10.0725-5.24c2.977-2.7358,5.1006-6.3403,6.2249-10.2138  C52.5807,33.3171,52.7498,28.8064,51.981,24.4812z" /></svg>
+            </div>
+            <div className="button-log" style={styles.buttonLog}>
+              <svg xmlnsXlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" width="56.693px" viewBox="0 0 56.693 56.693" version="1.1" id="Layer_1" height="56.693px" style={styles.icon}><path d="M40.43,21.739h-7.645v-5.014c0-1.883,1.248-2.322,2.127-2.322c0.877,0,5.395,0,5.395,0V6.125l-7.43-0.029  c-8.248,0-10.125,6.174-10.125,10.125v5.518h-4.77v8.53h4.77c0,10.947,0,24.137,0,24.137h10.033c0,0,0-13.32,0-24.137h6.77  L40.43,21.739z" /></svg>
             </div>
           </div>
 
           <button
             type="submit"
+            className="button-confirm"
             disabled={loading}
             style={{
-              ...styles.submitBtn,
+              ...styles.buttonConfirm,
               opacity: loading ? 0.6 : 1,
               cursor: loading ? 'not-allowed' : 'pointer',
             }}
           >
-            {loading && (
-              <span style={styles.spinner}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <circle cx="12" cy="12" r="10" strokeDasharray="31.4 31.4" strokeLinecap="round" />
-                </svg>
-              </span>
-            )}
-            {loading ? t('login.submitting') : t('login.submit')}
+            {loading ? t('login.submitting') : `${t('login.submit')} →`}
           </button>
         </form>
 
         {error && (
-          <div
-            style={{
-              ...styles.errorBox,
-              borderColor: errorType === ERR_TYPE.EXPIRED ? '#ffa500' : '#ff6b6b',
-            }}
-            role="alert"
-          >
+          <div style={styles.errorBox} role="alert">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={errorType === ERR_TYPE.EXPIRED ? '#ffa500' : '#ff6b6b'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               {errorType === ERR_TYPE.NETWORK ? (
                 <>
@@ -197,13 +159,9 @@ export default function AdminLogin({ onLogin, expired }) {
               {errorType !== ERR_TYPE.NETWORK && <line x1="12" y1="8" x2="12" y2="12" />}
               {errorType !== ERR_TYPE.NETWORK && <line x1="12" y1="16" x2="12.01" y2="16" />}
             </svg>
-            <span style={{ ...styles.errorText, color: errorType === ERR_TYPE.EXPIRED ? '#ffa500' : '#ff6b6b' }}>{error}</span>
+            <span style={{ color: errorType === ERR_TYPE.EXPIRED ? '#ffa500' : '#ff6b6b', fontSize: '1.3rem', fontWeight: 600 }}>{error}</span>
           </div>
         )}
-
-        <div style={styles.footer}>
-          <span style={styles.footerText}>Panel v1.0</span>
-        </div>
       </div>
     </div>
   );
@@ -229,106 +187,97 @@ const styles = {
     zIndex: 1,
     width: '100%',
     maxWidth: '420px',
-    background: '#1a1a1a',
-    border: '1px solid #2a2a2a',
-    borderRadius: '16px',
-    padding: '3.5rem 3rem 2.5rem',
-    boxShadow: '0 0 40px rgba(0, 255, 148, 0.05), 0 8px 32px rgba(0, 0, 0, 0.5)',
-  },
-  header: {
-    textAlign: 'center',
-    marginBottom: '3rem',
-  },
-  logo: {
-    display: 'inline-flex',
-    padding: '1rem',
-    borderRadius: '12px',
-    background: 'rgba(0, 255, 148, 0.08)',
-    marginBottom: '1.5rem',
+    padding: '20px',
+    background: 'lightgrey',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    gap: '20px',
+    borderRadius: '5px',
+    border: '2px solid #323232',
+    boxShadow: '4px 4px #323232',
   },
   title: {
-    fontSize: '2.2rem',
-    fontWeight: 700,
-    color: '#fff',
-    letterSpacing: '-0.02em',
+    color: '#323232',
+    fontWeight: 900,
+    fontSize: '20px',
+    marginBottom: '25px',
   },
-  fieldGroup: {
-    marginBottom: '2rem',
-  },
-  label: {
-    display: 'block',
-    fontSize: '1.3rem',
+  titleSpan: {
+    color: '#666',
     fontWeight: 600,
-    color: '#aaa',
-    marginBottom: '0.8rem',
+    fontSize: '17px',
   },
-  inputWrapper: {
+  form: {
+    width: '100%',
     display: 'flex',
-    alignItems: 'center',
-    gap: '1rem',
-    border: '2px solid #333',
-    borderRadius: '10px',
-    padding: '0 1.4rem',
-    transition: 'border-color 0.2s',
-    background: '#131313',
-  },
-  inputIcon: {
-    flexShrink: 0,
+    flexDirection: 'column',
+    gap: '20px',
   },
   input: {
-    flex: 1,
-    background: 'transparent',
-    border: 'none',
+    width: '100%',
+    height: '40px',
+    borderRadius: '5px',
+    border: '2px solid #323232',
+    backgroundColor: '#fff',
+    boxShadow: '4px 4px #323232',
+    fontSize: '15px',
+    fontWeight: 600,
+    color: '#323232',
+    padding: '5px 10px',
     outline: 'none',
-    color: '#fff',
+    boxSizing: 'border-box',
     fontFamily: 'inherit',
-    fontSize: '1.5rem',
-    padding: '1.2rem 0',
-    width: '100%',
   },
-  submitBtn: {
-    width: '100%',
-    padding: '1.3rem',
-    borderRadius: '10px',
-    border: 'none',
-    background: '#00FF94',
-    color: '#111',
-    fontFamily: 'inherit',
-    fontSize: '1.6rem',
-    fontWeight: 700,
+  loginWith: {
     display: 'flex',
-    alignItems: 'center',
+    gap: '20px',
     justifyContent: 'center',
-    gap: '0.8rem',
-    marginTop: '1rem',
-    transition: 'opacity 0.2s, transform 0.1s',
+    width: '100%',
   },
-  spinner: {
-    display: 'inline-flex',
-    animation: 'spin 0.8s linear infinite',
+  buttonLog: {
+    cursor: 'pointer',
+    width: '40px',
+    height: '40px',
+    borderRadius: '100%',
+    border: '2px solid #323232',
+    backgroundColor: '#fff',
+    boxShadow: '4px 4px #323232',
+    color: '#323232',
+    fontSize: '25px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  icon: {
+    width: '24px',
+    height: '24px',
+    fill: '#323232',
+  },
+  buttonConfirm: {
+    width: '120px',
+    height: '40px',
+    borderRadius: '5px',
+    border: '2px solid #323232',
+    backgroundColor: '#fff',
+    boxShadow: '4px 4px #323232',
+    fontSize: '17px',
+    fontWeight: 600,
+    color: '#323232',
+    cursor: 'pointer',
+    fontFamily: 'inherit',
+    margin: '0 auto',
   },
   errorBox: {
     display: 'flex',
     alignItems: 'center',
     gap: '1rem',
-    marginTop: '2rem',
     padding: '1.2rem 1.4rem',
     borderRadius: '10px',
-    border: '1px solid',
+    border: '1px solid #ff6b6b',
     background: 'rgba(255, 107, 107, 0.06)',
-  },
-  errorText: {
-    fontSize: '1.3rem',
-    fontWeight: 600,
-    lineHeight: 1.4,
-  },
-  footer: {
-    marginTop: '3rem',
-    textAlign: 'center',
-  },
-  footerText: {
-    fontSize: '1.1rem',
-    color: '#444',
-    letterSpacing: '0.05em',
+    width: '100%',
+    boxSizing: 'border-box',
   },
 };
