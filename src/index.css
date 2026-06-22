@@ -43,6 +43,13 @@
   font-display: swap;
 }
 @font-face {
+  font-family: 'Dabestan';
+  src: url('/fonts/Dabestan-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
   font-family: 'Arad';
   src: url('/fonts/Arad-Bold.woff2') format('woff2');
   font-weight: bold;
@@ -729,6 +736,9 @@ button, input, select, textarea, [role="button"] {
 .github-contrib {
     padding-bottom: 2rem;
 }
+.github-contrib .section__title {
+    font-family: 'Dabestan', 'DigiVorojak', sans-serif;
+}
 .github-contrib__box {
     margin-top: 5rem;
     width: 100%;
@@ -761,7 +771,8 @@ button, input, select, textarea, [role="button"] {
 }
 .github-contrib__svg svg text {
     fill: #888 !important;
-    font-size: 10px !important;
+    font-size: 11px !important;
+    font-family: 'Dabestan', 'Arad', sans-serif !important;
 }
 .github-contrib__svg svg rect[fill="#ebedf0"],
 .github-contrib__svg svg rect[fill="#f0f0f0"] {
