@@ -22,6 +22,20 @@
   font-display: swap;
 }
 @font-face {
+  font-family: 'Pikaar';
+  src: url('/fonts/pikaar.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Divar';
+  src: url('/fonts/divar.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
   font-family: 'Arad';
   src: url('/fonts/Arad-Regular.woff2') format('woff2');
   font-weight: normal;
@@ -95,8 +109,11 @@ body {
     height: 100%;
     line-height: 1.8;
     font-size: 1.6rem;
-    font-family: 'Arad', 'Vazirmatn', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: 'Divar', 'Arad', 'Vazirmatn', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     direction: rtl;
+}
+button, input, select, textarea, [role="button"] {
+    font-family: 'Divar', 'Arad', 'Vazirmatn', sans-serif;
 }
 #root {
     height: 100%;
@@ -578,6 +595,9 @@ body {
     text-align: center;
     padding-top: 1.3rem;
     padding-bottom: 1.3rem;
+}
+.footer__credit {
+    font-family: 'Pikaar', 'Arad', 'Vazirmatn', sans-serif;
 }
 .footer__link{
     color: #64fcd9;
@@ -1491,9 +1511,6 @@ input:-webkit-autofill:focus {
     border-bottom: 1px solid #222;
     flex-wrap: wrap;
 }
-.article-toolbar__share {
-    flex: 1;
-}
 .article-toolbar__actions {
     display: flex;
     gap: 0.4rem;
@@ -1523,31 +1540,6 @@ input:-webkit-autofill:focus {
 }
 
 /* Share buttons */
-.article-share {
-    display: flex;
-    gap: 0.4rem;
-}
-.article-share__btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid #333;
-    cursor: pointer;
-    transition: all 0.15s;
-    font-size: 0;
-}
-.article-share__btn:hover {
-    background: var(--hover) !important;
-    border-color: var(--hover) !important;
-}
-.article-share__btn--copy {
-    font-size: 0;
-}
-
 /* TOC panel (collapsible) */
 .article-toc-panel {
     background: #141414;
@@ -1715,23 +1707,6 @@ input:-webkit-autofill:focus {
 }
 
 /* Bottom share */
-.article-share-bottom {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid #222;
-}
-.article-share-bottom__label {
-    font-size: 1.1rem;
-    color: #666;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
 /* ===== AUTHOR ===== */
 .article-author {
     display: flex;

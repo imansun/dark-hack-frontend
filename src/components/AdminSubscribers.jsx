@@ -30,6 +30,18 @@ export default function AdminSubscribers({ token, onUnauthorized }) {
     );
   };
 
+  const del = (id) => {
+    if (!confirm(isRtl ? 'آیا از حذف این مشترک اطمینان دارید؟' : 'Delete this subscriber?')) return;
+    fetch(`/api/subscribers/admin/${id}`, { method: 'DELETE', headers: auth() })
+      .then((r) => {
+        if (r.status === 401) { onUnauthorized(); return; }
+        if (!r.ok) throw new Error();
+        setSubs((prev) => prev.filter((s) => s.id !== id));
+        success(isRtl ? 'حذف شد' : 'Deleted');
+      })
+      .catch(() => error(isRtl ? 'خطا در حذف' : 'Delete failed'));
+  };
+
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
@@ -56,7 +68,7 @@ export default function AdminSubscribers({ token, onUnauthorized }) {
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr style={{ borderBottom: '1px solid #222' }}>
-                {['Email', 'Status', 'Date'].map((h) => (
+                {['Email', 'Status', 'Date', ''].map((h) => (
                   <th key={h} style={{ padding: '1rem 1.2rem', textAlign: 'left', color: '#888', fontSize: '1.15rem', fontWeight: 700 }}>{h}</th>
                 ))}
               </tr>
@@ -74,6 +86,13 @@ export default function AdminSubscribers({ token, onUnauthorized }) {
                   </td>
                   <td style={{ padding: '1rem 1.2rem', color: '#888', fontSize: '1.15rem' }}>
                     {new Date(s.createdAt).toLocaleDateString()}
+                  </td>
+                  <td style={{ padding: '1rem 1.2rem' }}>
+                    <button onClick={() => del(s.id)} style={{
+                      padding: '0.4rem 0.8rem', borderRadius: '4px', border: '1px solid #ff6b6b',
+                      background: 'transparent', color: '#ff6b6b', fontFamily: 'inherit',
+                      fontSize: '1.05rem', cursor: 'pointer', lineHeight: 1,
+                    }}>×</button>
                   </td>
                 </tr>
               ))}
