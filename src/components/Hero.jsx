@@ -55,7 +55,7 @@ export default function Hero({ navRef }) {
           )}
         </div>
         <div className="header__right">
-          <img src="/assets/illustrations/header.svg" alt="" />
+          <img src="/assets/illustrations/header.svg" alt={p.name} />
         </div>
       </section>
       <span className="header__bg"></span>

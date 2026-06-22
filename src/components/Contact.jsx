@@ -60,7 +60,7 @@ export default function Contact() {
           {status === 'error' && <p style={{ marginTop: '1rem', textAlign: 'center', color: '#ff6b6b' }}>{t('contact.error')}</p>}
         </form>
         <span className="contact__illustration">
-          <img src="/assets/illustrations/connect.svg" alt="" />
+          <img src="/assets/illustrations/connect.svg" alt={t('contact.title')} />
         </span>
       </div>
     </section>

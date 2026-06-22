@@ -17,6 +17,12 @@
     "loading": "Loading...",
     "error": "Failed to load licenses."
   },
+  "seo": {
+    "title": "Iman Norouzi Esfajir | Portfolio",
+    "description": "Personal portfolio of Iman Norouzi Esfajir - AI specialist, software architect, and online systems security expert",
+    "keywords": "Iman Norouzi, portfolio, developer, AI, software architecture, security",
+    "ogImageAlt": "Iman Norouzi Esfajir Portfolio"
+  },
   "blog": {
     "title": "Blog",
     "loading": "Loading...",

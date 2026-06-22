@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
+import { HelmetProvider } from 'react-helmet-async';
 import SweetScroll from 'sweet-scroll';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
@@ -9,6 +11,7 @@ import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
 import AdminDashboard from './components/AdminDashboard.jsx';
 import AdminLogin from './components/AdminLogin.jsx';
+import SeoHelmet from './components/SeoHelmet.jsx';
 
 const SECTIONS = ['heroHeader', 'services', 'works', 'blog', 'contact'];
 const BREAKPOINT = 576;
@@ -22,6 +25,7 @@ export default function App() {
   const [adminToken, setAdminToken] = useState(
     localStorage.getItem('admin_token') || null,
   );
+  const { t } = useTranslation();
   const navRef = useRef(null);
   const sweetScrollRef = useRef(null);
 
@@ -115,8 +119,18 @@ export default function App() {
     }
   };
 
+  const sectionMeta = {
+    heroHeader: { title: null, desc: null },
+    services: { title: t('services.title'), desc: t('seo.description') },
+    works: { title: t('works.title'), desc: t('seo.description') },
+    blog: { title: t('blog.title'), desc: t('seo.description') },
+    contact: { title: t('contact.title'), desc: t('seo.description') },
+  };
+  const currentMeta = sectionMeta[activeSection] || sectionMeta.heroHeader;
+
   return (
-    <>
+    <HelmetProvider>
+      <SeoHelmet title={currentMeta.title} description={currentMeta.desc} />
       {!adminMode && (
         <Navbar
           ref={navRef}
@@ -144,6 +158,6 @@ export default function App() {
         )}
       </main>
       <Footer adminMode={adminMode} toggleAdmin={toggleAdmin} />
-    </>
+    </HelmetProvider>
   );
 }
