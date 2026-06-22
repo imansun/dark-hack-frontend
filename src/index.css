@@ -21,6 +21,20 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Arad';
+  src: url('/fonts/Arad-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Arad';
+  src: url('/fonts/Arad-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -81,7 +95,7 @@ body {
     height: 100%;
     line-height: 1.8;
     font-size: 1.6rem;
-    font-family: 'Vazirmatn', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: 'Arad', 'Vazirmatn', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     direction: rtl;
 }
 #root {
