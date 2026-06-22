@@ -9,6 +9,7 @@ import AdminCategories from './AdminCategories';
 import AdminComments from './AdminComments';
 import AdminSubscribers from './AdminSubscribers';
 import AdminAuditLog from './AdminAuditLog';
+import AdminTerminal from './AdminTerminal';
 
 const NAV_ITEMS = [
   { key: 'profile', labelFa: 'پروفایل', labelEn: 'Profile', icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' },
@@ -18,6 +19,7 @@ const NAV_ITEMS = [
   { key: 'categories', labelFa: 'دسته‌بندی‌ها', labelEn: 'Categories', icon: 'M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z' },
   { key: 'comments', labelFa: 'نظرات', labelEn: 'Comments', icon: 'M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z' },
   { key: 'subscribers', labelFa: 'مشترکین', labelEn: 'Subscribers', icon: 'M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 3a4 4 0 100 8 4 4 0 000-8z' },
+  { key: 'terminal', labelFa: 'ترمینال', labelEn: 'Terminal', icon: 'M4 17l6-6L4 5m8 12h8' },
   { key: 'auditlog', labelFa: 'لاگ فعالیت‌ها', labelEn: 'Audit Log', icon: 'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
   { key: 'contacts', labelFa: 'پیام‌ها', labelEn: 'Messages', icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
 ];
@@ -144,6 +146,7 @@ export default function AdminDashboard({ token, onLogout }) {
           {activeTab === 'subscribers' && <AdminSubscribers token={token} onUnauthorized={onLogout} />}
           {activeTab === 'auditlog' && <AdminAuditLog token={token} onUnauthorized={onLogout} />}
           {activeTab === 'contacts' && <AdminContacts token={token} onUnauthorized={onLogout} />}
+          {activeTab === 'terminal' && <AdminTerminal />}
         </main>
       </div>
     </div>
