@@ -1,45 +1,34 @@
-import '../styles/post-detail.css';
+import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
-const BookmarkSvg = () => (
-  <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
-  </svg>
-);
-const EllipsisHSvg = () => (
-  <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" />
-  </svg>
-);
+export default function AuthorPostsList({ onViewPost }) {
+  const { t, i18n } = useTranslation();
+  const [posts, setPosts] = useState([]);
 
-const posts = [
-  { uid: '1', title: 'Tailwind CSS چیست؟', cover: '/images/objects/object-1.jpg', readTime: '۲ دقیقه مطالعه', created_at: '۱۵ آبان' },
-  { uid: '2', title: 'برترین سیستم‌های طراحی', cover: '/images/objects/object-15.jpg', readTime: '۵ دقیقه مطالعه', created_at: '۲۱ مهر' },
-  { uid: '3', title: '۱۰ نکته برای بهتر کردن دوربین خوب', cover: '/images/objects/object-17.jpg', readTime: '۷ دقیقه مطالعه', created_at: '۳۰ مهر' },
-  { uid: '4', title: '۲۵ حقیقت شگفت‌انگیز درباره صندلی', cover: '/images/objects/object-19.jpg', readTime: '۴ دقیقه مطالعه', created_at: '۱۰ آبان' },
-];
+  useEffect(() => {
+    fetch(`/api/posts?lang=${i18n.language}&page=1&limit=5`)
+      .then((r) => r.json())
+      .then((data) => setPosts(data.posts || data))
+      .catch(() => {});
+  }, [i18n.language]);
 
-export default function AuthorPostsList({ t, authorName = 'تراویس فولر' }) {
-  const title = t?.('authorPosts.title', { author: authorName }) || `مطالب بیشتر از ${authorName}`;
+  if (!posts.length) return null;
 
   return (
-    <div style={{ marginTop: 20 }}>
-      <p className="pd-section-title" style={{ textTransform: 'none', letterSpacing: 0 }}>{title}</p>
-      <div className="pd-author-posts">
+    <div style={{ marginTop: '2rem' }}>
+      <h4 style={{ fontSize: '1.4rem', fontWeight: 600, color: '#688277', marginBottom: '1rem' }}>
+        {t('authorPosts.title', { author: '' }) || 'مقالات'}
+      </h4>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         {posts.map((post) => (
-          <div key={post.uid} className="pd-author-post-item">
-            <div className="pd-author-post-content">
-              <p className="pd-article-date" style={{ fontWeight: 500, color: '#1e293b', marginBottom: 4 }}>{post.created_at}</p>
-              <div className="pd-author-post-title"><a href="##">{post.title}</a></div>
-              <div className="pd-article-footer" style={{ marginTop: 8 }}>
-                <p className="pd-article-date" style={{ fontWeight: 500 }}>{post.readTime}</p>
-                <div className="pd-article-actions">
-                  <button className="pd-btn-icon-28"><EllipsisHSvg /></button>
-                  <button className="pd-btn-icon-28"><BookmarkSvg /></button>
-                </div>
-              </div>
-            </div>
-            <img src={post.cover} alt={post.title} style={{ width: 96, height: 96, borderRadius: 10, objectFit: 'cover', flexShrink: 0 }} />
-          </div>
+          <button
+            key={post.id}
+            onClick={() => onViewPost(post.slug)}
+            style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', textAlign: 'right', fontFamily: 'inherit' }}
+          >
+            <div style={{ fontSize: '1.3rem', fontWeight: 500, color: '#fff', marginBottom: '0.2rem' }}>{post.title}</div>
+            <div style={{ fontSize: '1.1rem', color: '#688277' }}>{post.excerpt?.slice(0, 80)}...</div>
+          </button>
         ))}
       </div>
     </div>

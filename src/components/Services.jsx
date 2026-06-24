@@ -79,12 +79,14 @@ export default function Services() {
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
             >
-              <span className="service-card__illustration">
-                <img
-                  src={service.imageUrl || `/assets/services/${FALLBACK_IMGS[i]}.svg`}
-                  alt={`${service.title} Illustration`}
-                />
-              </span>
+              {service.imageUrl || i < FALLBACK_IMGS.length ? (
+                <span className="service-card__illustration">
+                  <img
+                    src={service.imageUrl || `/assets/services/${FALLBACK_IMGS[i]}.svg`}
+                    alt={`${service.title} Illustration`}
+                  />
+                </span>
+              ) : null}
               <h3 className="service-card__title">{service.title}</h3>
               <p className="service-card__msg">{service.description}</p>
               <span className="service-card__bg"></span>

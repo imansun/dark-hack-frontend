@@ -2,7 +2,7 @@
   "nav": {
     "home": "Home",
     "services": "Services",
-    "works": "Licenses",
+    "works": "Projects",
     "blog": "Blog",
     "contact": "Contact"
   },
@@ -14,17 +14,17 @@
     "empty": "No services yet."
   },
   "works": {
-    "title": "Licenses",
-    "subtitle": "Professional certifications and licenses earned through years of expertise.",
-    "viewProject": "View License",
+    "title": "Projects",
+    "subtitle": "Professional projects in AI, Machine Learning, and Software Development.",
+    "viewProject": "View Project",
     "loading": "Loading...",
-    "error": "Failed to load licenses."
+    "error": "Failed to load projects."
   },
   "seo": {
-    "title": "Iman Norouzi Esfajir | Portfolio",
-    "description": "Personal portfolio of Iman Norouzi Esfajir - AI specialist, software architect, and online systems security expert",
-    "keywords": "Iman Norouzi, portfolio, developer, AI, software architecture, security",
-    "ogImageAlt": "Iman Norouzi Esfajir Portfolio"
+    "title": "Maryam Vatanpour Azghandi | Software Engineer & AI",
+    "description": "Personal portfolio of Maryam Vatanpour Azghandi - Software Engineer specializing in AI, Machine Learning, and NLP",
+    "keywords": "Maryam Vatanpour, portfolio, AI, machine learning, software engineer, developer",
+    "ogImageAlt": "Maryam Vatanpour Azghandi Portfolio"
   },
   "blog": {
     "title": "Blog",
@@ -36,7 +36,7 @@
     "publishedOn": "Published on",
     "updatedOn": "Last updated",
     "readingTime": "min read",
-    "author": "Iman Norouzi Esfajir",
+    "author": "Maryam Vatanpour Azghandi",
     "share": "Share",
     "relatedPosts": "Related Posts",
     "notFound": "Post not found.",
@@ -56,7 +56,7 @@
   "footer": {
     "credit": "Template made with ❤️ by",
     "viewSite": "View Site",
-    "manageWorks": "Manage Licenses"
+    "manageWorks": "Manage Projects"
   },
   "login": {
     "title": "Admin Login",
@@ -75,17 +75,17 @@
     "errorExpired": "Session expired, please log in again"
   },
   "admin": {
-    "title": "Manage Licenses",
-    "addWork": "+ Add License",
+    "title": "Manage Projects",
+    "addWork": "+ Add Project",
     "preview": "Preview",
     "titleCol": "Title",
     "badges": "Badges",
     "actions": "Actions",
     "edit": "Edit",
     "delete": "Delete",
-    "empty": "No licenses yet.",
-    "editTitle": "Edit License",
-    "addTitle": "Add License",
+    "empty": "No projects yet.",
+    "editTitle": "Edit Project",
+    "addTitle": "Add Project",
     "titleLabel": "Title *",
     "description": "Description",
     "projectUrl": "Project URL",
@@ -94,7 +94,7 @@
     "save": "Save",
     "saving": "Saving...",
     "cancel": "Cancel",
-    "deleteConfirm": "Delete this license?"
+    "deleteConfirm": "Delete this project?"
   },
   "recentArticles": {
     "title": "Recent Articles",
@@ -112,12 +112,12 @@
     "error": "Failed to fetch GitHub data"
   },
   "terminal": {
-    "about": "Full-stack developer passionate about modern design and great UX. Specializing in React, NestJS, and web technologies.",
-    "skills": "Skills: React, NestJS, TypeScript, MySQL, Docker, Git, HTML/CSS, JavaScript, REST API, UI/UX Design",
+    "about": "Software engineer specializing in AI and Machine Learning. Passionate about intelligent systems, NLP, and computer vision.",
+    "skills": "Skills: Python, PyTorch, TensorFlow, React, NestJS, TypeScript, Docker, Git, SQL, NLP, Computer Vision",
     "projects": "Check the Works section to see my projects.",
-    "contact": "Email: imannorouzi@example.com\nVisit the Contact section to send a message.",
-    "social": "GitHub: github.com/ImanNorouziEsfajir",
-    "whoami": "User: Iman Norouzi Esfajir\nRole: Full-stack Developer\nStatus: Active"
+    "contact": "Email: maryam.vatanpour@example.com\nVisit the Contact section to send a message.",
+    "social": "GitHub: github.com/maryamvatanpour",
+    "whoami": "User: Maryam Vatanpour Azghandi\nRole: Software Engineer & AI Specialist\nStatus: Active"
   },
   "language": {
     "fa": "فارسی",

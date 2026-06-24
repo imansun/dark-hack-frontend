@@ -9,7 +9,7 @@ export default function SeoHelmet({ title, description, image, url, type }) {
   const ogImageAlt = t('seo.ogImageAlt');
   const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle;
   const pageDesc = description || siteDesc;
-  const pageUrl = url || 'https://imannorouzi.ir';
+  const pageUrl = url || 'https://marmaryshop.com';
   const ogImage = image || '/assets/icons/apple-touch-icon-180x180.png';
   const langMap = { fa: 'fa-IR', en: 'en-US', ar: 'ar-SA' };
   const currentLang = langMap[i18n.language] || 'fa-IR';
@@ -17,19 +17,19 @@ export default function SeoHelmet({ title, description, image, url, type }) {
   const personJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: 'Iman Norouzi Esfajir',
-    url: 'https://imannorouzi.ir',
-    image: 'https://imannorouzi.ir/assets/icons/apple-touch-icon-180x180.png',
-    jobTitle: 'AI Specialist, Software Architect, Online Systems Security Expert',
-    knowsAbout: ['Artificial Intelligence', 'Software Architecture', 'Cybersecurity', 'Web Development'],
-    sameAs: ['https://github.com/ImanNorouziEsfajir'],
+    name: 'Maryam Vatanpour Azghandi',
+    url: 'https://marmaryshop.com',
+    image: 'https://marmaryshop.com/assets/icons/apple-touch-icon-180x180.png',
+    jobTitle: 'Software Engineer, AI Specialist',
+    knowsAbout: ['Artificial Intelligence', 'Machine Learning', 'Natural Language Processing', 'Computer Vision', 'Software Development'],
+    sameAs: ['https://github.com/maryamvatanpour', 'https://linkedin.com/in/maryamvatanpour'],
   };
 
   const websiteJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: siteTitle,
-    url: 'https://imannorouzi.ir',
+    url: 'https://marmaryshop.com',
     description: siteDesc,
     inLanguage: currentLang,
   };
@@ -40,7 +40,7 @@ export default function SeoHelmet({ title, description, image, url, type }) {
     headline: title,
     description: pageDesc,
     image: ogImage,
-    author: { '@type': 'Person', name: 'Iman Norouzi Esfajir' },
+    author: { '@type': 'Person', name: 'Maryam Vatanpour Azghandi' },
   } : null;
 
   return (
@@ -51,7 +51,7 @@ export default function SeoHelmet({ title, description, image, url, type }) {
       <meta name="keywords" content={siteKeywords} />
       <meta name="robots" content="index, follow" />
       <meta name="googlebot" content="index, follow" />
-      <meta name="author" content="Iman Norouzi Esfajir" />
+      <meta name="author" content="Maryam Vatanpour Azghandi" />
 
       <link rel="canonical" href={pageUrl} />
 
@@ -70,10 +70,10 @@ export default function SeoHelmet({ title, description, image, url, type }) {
       <meta name="twitter:image" content={ogImage} />
       <meta name="twitter:image:alt" content={ogImageAlt} />
 
-      <link rel="alternate" hrefLang="fa" href="https://imannorouzi.ir" />
-      <link rel="alternate" hrefLang="en" href="https://imannorouzi.ir/en" />
-      <link rel="alternate" hrefLang="ar" href="https://imannorouzi.ir/ar" />
-      <link rel="alternate" hrefLang="x-default" href="https://imannorouzi.ir" />
+      <link rel="alternate" hrefLang="fa" href="https://marmaryshop.com" />
+      <link rel="alternate" hrefLang="en" href="https://marmaryshop.com/en" />
+      <link rel="alternate" hrefLang="ar" href="https://marmaryshop.com/ar" />
+      <link rel="alternate" hrefLang="x-default" href="https://marmaryshop.com" />
 
       <script type="application/ld+json">{JSON.stringify(personJsonLd)}</script>
       <script type="application/ld+json">{JSON.stringify(websiteJsonLd)}</script>

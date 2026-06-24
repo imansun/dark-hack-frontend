@@ -6,7 +6,7 @@ export default function Footer({ adminMode, toggleAdmin }) {
   return (
     <footer className="footer">
       <span className="footer__credit">{t('footer.credit')}</span>{' '}
-      <a href="https://github.com/ImanNorouziEsfajir" target="_blank" className="footer__link">ImanNorouziEsfajir</a>
+      <a href="https://github.com/maryamvatanpour" target="_blank" className="footer__link">maryamvatanpour</a>
       <span style={{ margin: '0 1rem' }}>|</span>
       <button
         onClick={toggleAdmin}
